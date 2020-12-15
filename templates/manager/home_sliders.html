@@ -1,0 +1,62 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Home Sliders List</title>{% endblock %}
+
+{% load crispy_forms_tags%}
+
+{% block main %}
+
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <div class="row wow fadeIn">
+            <div class="col-6">
+                <div class="card card-list">
+                    <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                        <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{sliders.count}}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-5">
+                            <strong>Home Slider List</strong>
+                        </div>
+                        <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">Sliders</th>
+                            <th scope="col">Image</th>
+                            <th scope="col"></th>
+                            <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in sliders %}
+                                <tr>
+                                <th scope="row"><a class="text-primary">{{item.title}}</a></th>
+                                <th scope="row"><img src="{{item.imageURL}}" alt="" style="width: 30px; display: block;"></th>
+                                <th></th>
+                                <th><a class='btn btn-danger btn-sm' href="#">Delete</a></th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        </table>
+                    </div>
+                </div> 
+            </div>
+            <div class="col-6">
+                <div class='card'>
+                    <div class='text-center mt-3'>
+                        <strong>Create Sliders</strong>  
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{form|crispy}}
+                            <button class='btn btn-dark' type="submit">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</main>    
+
+{% endblock %}

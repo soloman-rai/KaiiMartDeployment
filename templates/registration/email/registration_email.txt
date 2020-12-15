@@ -1,0 +1,8 @@
+Hello,
+    Your Account for KaiMart has been created. Now you can login and start using.
+    
+    Your credentials are as below:
+    
+        Username: {{username}}
+        Email: {{email}}
+        Password: {{password}}

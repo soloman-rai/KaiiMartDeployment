@@ -1,0 +1,57 @@
+{% extends 'base.html' %} 
+
+
+{% block title %}<title>All Products</title>{% endblock %}
+
+{% block main %}
+
+    <div class="container mt-5">
+        <section class="text-center mb-4">
+          <!--Grid row-->
+          {% if product %}
+            <div class="row wow fadeIn">     
+              {% for item in product %}
+                <!--Grid column-->     
+                <div class="col-lg-3 col-md-6 mb-4"> 
+                  <!--Card-->
+                  <div class="card"> 
+                    <!--Card image-->
+                    <div class="view overlay">
+                      <img src="{{item.imageURL}}" class="card-img-top"
+                        alt="...">
+                      <a href="{% url 'product:detail' item.id %}">
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
+                    </div>
+                    <!--Card image-->
+          
+                    <!--Card content-->
+                    <div class="card-body text-center">
+                      <!--Category & Title-->
+                      <h5>
+                        <strong>
+                          <a href="{% url 'product:detail' item.id %}" class="dark-grey-text">
+                            {{item.title}}
+                          </a>
+                        </strong>
+                      </h5>
+          
+                      <h4 class="font-weight-bold blue-text">
+                        <strong>Rs {{item.price}}</strong>
+                      </h4>
+                    </div>
+                    <!--Card content-->
+                  </div>
+                  <!--Card-->
+                </div>
+              {% endfor %}
+              <!--Grid column-->   
+            </div>
+            <!--Grid row-->  
+          {% else %} 
+            <div><h1>No products to show. Add product</h1></div>
+          {% endif %}   
+        </section> 
+      </div>
+
+{% endblock %}

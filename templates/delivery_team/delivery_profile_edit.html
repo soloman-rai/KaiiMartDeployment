@@ -1,0 +1,23 @@
+{% extends 'other_base.html' %}
+
+
+{% block title %}<title>Profile Update</title>{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+    <div class="container mt-5">
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{form|crispy}}
+
+            <button type="submit" class="btn btn-primary">Update</button>    
+        </form>
+        <div class='mt-3'>
+            <a href="{% url 'delivery:profile' %}" class="btn btn-danger">Cancel</a>
+        </div>  
+    </div>
+
+{% endblock %}

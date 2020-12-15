@@ -1,0 +1,49 @@
+{% extends 'other_base.html' %}
+
+{% block title %}<title>Order Detail</title>{% endblock %}
+
+
+{% block main %}
+
+    <div class="container mt-5">
+        <h1>Order: {{order.order.order_id}}</h1>
+        <hr>
+        <h5>Status: {{order.order.status}}</h5>
+        <h5>Name: {{order.order.full_name}}</h5>
+        <h5>Email: {{order.order.email}}</h5>
+        <h5>Address: {{order.order.address}}</h5>
+        <h5>Phone: {{order.order.phone_num}}</h5>
+        <h5>Date Created: {{order.order.date_created}}</h5> 
+        <h5>Date Updated: {{order.order.date_updated}}</h5>  
+
+        <br><br>
+        <table class="table">
+            <thead class='table-dark'>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in product %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{item.product}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.item_total_price}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="row mt-5">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <h5>Delivery Cost: {{order.order.delivery_cost}}</h5>
+                <h5>Total: {{order.order.total}}</h5>
+            </div>
+        </div> 
+    </div>
+
+{% endblock %}

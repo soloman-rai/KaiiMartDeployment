@@ -1,0 +1,28 @@
+{% extends 'other_base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Supplier Waiting Form Update</title>
+{% endblock %}
+
+{% block main %}
+
+    <div class="mt-5"></div>
+
+    <div class="container" style="margin-top: 130px; margin-bottom: 75px;">
+        <div class="p-3">
+            <h4 class="text-center">Supplier Application Form Update</h4>
+            <form action="" method="POST">
+                {% csrf_token %}
+    
+                {{form|crispy}}
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-dark btn-md">Update</button>
+                </div> 
+            </form>
+        </div>
+    </div>
+{% endblock %}

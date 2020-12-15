@@ -1,0 +1,44 @@
+{% extends 'utils/main.html' %}
+
+{% block title %}<title>Register Customer</title>{% endblock %}
+{% load crispy_forms_tags%}
+
+{% block main %}
+
+    <div class="mt-5"></div>
+
+    <div style="background-image: url(../static/img/background.jpg); height: 100vh;">
+        <div class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="text-center text-danger mt-3">
+                            Register as Customer
+                        </div>
+                        <div class="card-body">
+                            <form class="text-center" style="color: #757575;" action="" method="post">
+                                {% csrf_token %}
+    
+                                {{form|crispy}}
+    
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-outline-orange my-4">SignUp</button>
+                                </div>
+
+                                <p>Already member?
+                                    <a href="{% url 'login' %}">Login</a>
+                                </p>
+
+                                <p>By clicking
+                                    <em>Sign up</em> you agree to our
+                                    <a href="" target="_blank">terms of service</a>
+                                </p>
+                            </form>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     
+{% endblock %}

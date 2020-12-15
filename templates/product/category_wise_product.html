@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load custom_tags %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/categories_styles.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/categories_responsive.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
+<script src="{% static 'coloshop/js/categories_custom.js' %}"></script>
+{% endblock %}
+
+{% block title %}<title>{{product.first.category}}</title>{% endblock %}
+
+{% block main %}
+
+  <div class="super_container">
+    <div class="container product_section_container">
+      <div class="row">
+        <div class="col product_section clearfix">
+          <div class="breadcrumbs d-flex flex-row align-items-center" style="margin-top: -30px;">
+            <ul>
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li class="active"><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>{{product.first.category}}</a></li>
+            </ul>
+          </div>
+          <div class="main_content">
+            <div class="products_iso">
+              <div class="row">
+                <div class="col">
+                  <div class="product-grid">
+                    {% for item in product %}
+                    <div class="product-item mb-5">
+                      <div class="product discount product_filter">
+                        <div class="product_image">
+                          <img src="{{item.imageURL}}" alt="">
+                        </div>
+                        <div class="favorite favorite_left"></div>
+                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+                        <div class="product_info">
+                          <h6 class="product_name"><a href="{% url 'product:detail' item.id %}">{{item.title}}</a></h6>
+                          <div class="product_price">Rs{{item.price_after_discount}}<span>Rs{{item.price}}</span></div>
+                        </div>
+                      </div>
+                      <div class="add_to_cart_button">
+                        <form method='POST' action="{% url 'carts:update' %}">
+                          {% csrf_token %}
+                          <input type="hidden" value="{{ item.id }}" name='products_id'>
+                          <input type='hidden' name='qty' value='1'/>
+                          <button class="btn btn-danger" type="submit" name='add' style="width: 100%;">
+                            Add to cart
+                            <span><i class="fa fa-cart-plus"></i></span>
+                          </button>   
+                        </form>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

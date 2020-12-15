@@ -1,0 +1,97 @@
+{% load static %}
+
+<header class="header1">
+    <!-- Header desktop -->
+    <div class="container-menu-header">
+        <div class="wrap_header">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="logo">
+                KaiMart
+                <!-- <img src="images/icons/logo.png" alt="IMG-LOGO"> -->
+            </a>
+
+            <!-- Menu -->
+            <div class="wrap_menu">
+                <nav class="menu">
+                    <ul class="main_menu">
+                        <li>
+                            <a href="{% url 'blog:home' %}">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Create Blog</a>
+                        </li>
+                        <li>
+                            <a href="#">My Blog</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Header Icon -->
+            <div class="header-icons">
+                <a href="#" class="header-wrapicon1 dis-block">
+                    <img src="{% static 'fashe/images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+                </a>
+                
+                <!-- {% if user.is_authenticated %}
+
+                    <li class="nav-item avatar dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                            aria-labelledby="navbarDropdownMenuLink-55">
+                            <a class="dropdown-item" href="">Profile</a>
+                            <a class="dropdown-item" href="">Settings</a>
+                        </div>
+                    </li> 
+                
+                {% endif %} -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Mobile -->
+    <div class="wrap_header_mobile">
+        <!-- Logo moblie -->		
+        <a href="{% url 'home' %}" class="logo-mobile">
+            KaiMart
+            <!-- <img src="images/icons/logo.png" alt="IMG-LOGO"> -->
+        </a>
+
+        <!-- Button show menu -->
+        <div class="btn-show-menu">
+            <!-- Header Icon mobile -->
+            <div class="header-icons-mobile">
+                <a href="#" class="header-wrapicon1 dis-block">
+                    <img src="{% static 'fashe/images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+                </a>
+            </div>
+
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </div>	
+    </div>
+
+    <!-- Menu Mobile -->
+    <div class="wrap-side-menu" >
+        <nav class="side-menu">
+            <ul class="main-menu">                
+                <li class="item-menu-mobile">
+                    <a href="{% url 'blog:home' %}">Home</a>
+                    <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+                </li>
+
+                <li class="item-menu-mobile">
+                    <a href="#">Create Blog</a>
+                </li>
+                <li class="item-menu-mobile">
+                    <a href="#">My Blog</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

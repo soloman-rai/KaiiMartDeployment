@@ -1,0 +1,155 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Admin Home</title>{% endblock %}
+
+
+{% block main %}
+
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid">
+        <h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Admin</h6>
+        <h3 class="font-weight-bold text-center dark-grey-text pb-2">Home</h3>
+        <hr class="w-header my-4">
+        <p class="lead text-center text-muted pt-2 mb-5">All available Departments</p>
+        
+        <div class="row wow fadeIn">
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card primary-color">
+                <div class="card-body py-3">
+                    <i class="far fa-money-bill-alt"></i>
+                    <p class="medium">Tags</p>
+                    <h4></h4>
+                </div>
+                <div class="py-3">
+                    {% for tag in tags %}
+                        <ul>
+                            <li>{{tag.title}}</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card warning-color">
+                <div class="card-body py-3">
+                    <i class="fas fa-chart-line"></i>
+                    <p class="medium">Category</p>
+                    <h4></h4>
+                </div>
+                <div>
+                    {% for item in category %}
+                        <ul>
+                            <li>{{item.title}}</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card light-blue lighten-1">
+                <div class="card-body py-3">
+                    <i class="fas fa-chart-pie"></i>
+                    <p class="medium">Delivery Team</p>
+                    <h4></h4>
+                </div>
+                <div>
+                    {% for team in delivery_team %}
+                        <ul>
+                            <li>{{team.username}}-({{team.user}})</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card red accent-2">
+                <div class="card-body py-3">
+                    <i class="fas fa-chart-bar"></i>
+                    <p class="medium">Product</p>
+                    <h4></h4>
+                </div>
+                <div>
+                    {% for item in product %}
+                        <ul>
+                            <li>{{item.title}}</li>
+                        </ul>
+                    {% endfor %}
+                </div>
+                </div>
+            </div>
+            
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card green accent-2">
+                    <div class="card-body py-3">
+                        <i class="fas fa-chart-bar"></i>
+                        <p class="medium">Supplier Profile</p>
+                        <h4></h4>
+                    </div>
+                    <div>
+                    {% for team in supplier_profile %}
+                        <ul>
+                            <li>{{team.username}}-({{team.user}})</li>
+                        </ul>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card grey accent-2">
+                    <div class="card-body py-3">
+                        <i class="fas fa-chart-bar"></i>
+                        <p class="medium">Manager</p>
+                        <h4></h4>
+                    </div>
+                    <div class="px-3">
+                        {% for person in manager %}
+                            <ul>
+                                <li>{{person.username}}-({{person.user}})</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card brown accent-2">
+                    <div class="card-body py-3">
+                        <i class="fas fa-chart-bar"></i>
+                        <p class="medium">Order</p>
+                        <h4></h4>
+                    </div>
+                    <div>
+                        {% for item in order %}
+                            <ul>
+                                <li>{{item.order_id}}-({{item.user}})</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6 mb-4">
+                <div class="card classic-admin-card teal">
+                    <div class="card-body py-3">
+                        <i class="fas fa-chart-bar"></i>
+                        <p class="medium">Customer</p>
+                        <h4></h4>
+                    </div>
+                    <div>
+                        {% for person in customer %}
+                            <ul>
+                                <li>{{person.username}}-({{person.user}})</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </div>
+</main>    
+
+{% endblock %}

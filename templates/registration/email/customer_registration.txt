@@ -1,0 +1,8 @@
+Hello, 
+
+    Please Confirm your registration using below PIN
+
+    PIN: {{otp_pin}}
+    
+
+

@@ -1,0 +1,24 @@
+{% extends 'utils/main.html' %}
+
+{% block title %}<title>Login Page</title>{% endblock %}
+
+
+{% block main %}
+
+    <div class="mt-5"></div>
+
+    <div class="container" style="margin-top: 150px;">
+        <div class="d-flex justify-content-center">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{% url 'customer:confirm' %}" method="post">
+                        {% csrf_token %}
+                        <input type="text" name='otp'>
+                        <button class='btn btn-info' type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title>Checkout Proceed</title>{% endblock %}
+
+{% load crispy_forms_tags%}
+
+{% block main %}
+
+<div class="mt-5"></div>
+
+<div class="container" style="margin-top: 100px; margin-bottom: 30px;">
+    <div class="d-flex justify-content-center"></div>
+    <div class="card mx-xl-5">            
+        <div class="card-body">
+            <p class="h4 text-center py-4">Order Confirmation</p>
+
+            <div class='ml-5 mt-5'>
+                <p>
+                    <label for="defaultFormCardIdEx" class="dark-text font-weight-bold">Order Id: </label>
+                    {{order.order_id}}
+                </p>
+                <br>
+                <p>
+                    <label for="defaultFormCardNameEx" class="dark-text font-weight-bold">Name:: </label>
+                    {{order.full_name}}
+                </p>
+                <br>
+                <p>
+                    <label for="defaultFormCardEmailEx" class="dark-text font-weight-bold">Email: </label>
+                    {{order.email}}
+                </p>
+                <br>
+                <p>
+                    <label for="defaultFormCardAddressEx" class="dark-text font-weight-bold">Address: </label>
+                    {{order.address}}, {{order.city}}
+                </p>
+                <br>
+                <p>
+                    <label for="defaultFormCardPhoneNumEx" class="dark-text font-weight-bold">Phone Number: </label>
+                    {{order.phone_num}}
+                </p>
+            </div>
+
+            <form action="{% url 'orders:final' %}" method="post">
+                {% csrf_token %}
+                <div class="text-center py-4 mt-3">
+                    <button class="btn btn-info" type="submit" name='confirm'>Confirm Order<i
+                        class="fa fa-send ml-2"></i>
+                    </button>
+                </div>
+            </form>  
+        </div> 
+    </div>
+</div>
+
+{% endblock %}

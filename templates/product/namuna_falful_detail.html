@@ -1,0 +1,500 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load embed_video_tags %}
+{% load crispy_forms_tags%}
+{% load custom_tags %}
+
+{% block css %}
+	<link rel="stylesheet" href="{% static 'coloshop/plugins/themify-icons/themify-icons.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/single_styles.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/single_responsive.css' %}">
+
+	<style>
+
+		#similar_items img{
+			width: 200px;
+			height: 200px;
+			display: block;
+		}
+
+		#similar_items .carousel-control-prev,
+		.carousel-control-next{
+			height: 30px;
+			width: 30px;
+			outline: white;
+			background-size: 100%, 100%;
+			border-radius: 50%;
+			border: 1px solid black;
+			background-color: black;
+			margin-top: 10%;
+			
+		}
+
+		@media (min-width: 576px) {
+			.carousel-item {
+				margin-right: 0;
+			}
+			/* show 2 items */
+			.carousel-inner .active + .carousel-item {
+				display: block;
+			}
+			.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
+			.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
+				transition: none;
+			}
+			.carousel-inner .carousel-item-next {
+				position: relative;
+				transform: translate3d(0, 0, 0);
+			}
+			/* left or forward direction */
+			.active.carousel-item-left + .carousel-item-next.carousel-item-left,
+			.carousel-item-next.carousel-item-left + .carousel-item,
+			.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
+				position: relative;
+				transform: translate3d(-100%, 0, 0);
+				visibility: visible;
+			}
+			/* farthest right hidden item must be also positioned for animations */
+			.carousel-inner .carousel-item-prev.carousel-item-right {
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: -1;
+				display: block;
+				visibility: visible;
+			}
+			/* right or prev direction */
+			.active.carousel-item-right + .carousel-item-prev.carousel-item-right,
+			.carousel-item-prev.carousel-item-right + .carousel-item,
+			.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
+				position: relative;
+				transform: translate3d(100%, 0, 0);
+				visibility: visible;
+				display: block;
+				visibility: visible;
+			}
+		}
+		/* MD */
+		@media (min-width: 768px) {
+			/* left or forward direction */
+			.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
+				position: relative;
+				transform: translate3d(-100%, 0, 0);
+				visibility: visible;
+			}
+			/* right or prev direction */
+			.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
+				position: relative;
+				transform: translate3d(100%, 0, 0);
+				visibility: visible;
+				display: block;
+				visibility: visible;
+			}
+		}
+		/* LG */
+		@media (min-width: 991px) {
+			/* Show 3rd item*/
+			.carousel-inner .active + .carousel-item + .carousel-item {
+				display: block;
+			}
+			.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
+				transition: none;
+			}
+			.carousel-inner .carousel-item-next {
+				position: relative;
+				transform: translate3d(0, 0, 0);
+			}
+			/* left or forward direction */
+			.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+				position: relative;
+				transform: translate3d(-100%, 0, 0);
+				visibility: visible;
+			}
+			/* right or prev direction //t - previous slide direction last item animation fix */
+			.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
+				position: relative;
+				transform: translate3d(100%, 0, 0);
+				visibility: visible;
+				display: block;
+				visibility: visible;
+			}
+		}
+
+	</style>
+{% endblock %}
+
+{% block js %}
+	<script src="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
+	<script src="{% static 'coloshop/js/single_custom.js' %}"></script>
+
+	<script>
+		$('#similar_items').on('slide.bs.carousel', function (e) {
+    /*
+        CC 2.0 License Iatek LLC 2018 - Attribution required
+    */
+    var $e = $(e.relatedTarget);
+    var idx = $e.index();
+    var itemsPerSlide = 5;
+    var totalItems = $('.carousel-item').length;
+ 
+    if (idx >= totalItems-(itemsPerSlide-1)) {
+        var it = itemsPerSlide - (totalItems - idx);
+        for (var i=0; i<it; i++) {
+            // append slides to end
+            if (e.direction=="left") {
+                $('.carousel-item').eq(i).appendTo('.carousel-inner');
+            }
+            else {
+                $('.carousel-item').eq(0).appendTo('.carousel-inner');
+            }
+        }
+    }
+});
+	</script>
+{% endblock %}
+
+{% block main %}
+
+	<div class="super_container">
+		<div class="container single_product_container">
+			<div class="row">
+				<div class="col">
+					<!-- Breadcrumbs -->
+					<div class="breadcrumbs d-flex flex-row align-items-center">
+						<ul>
+							<li><a href="">Home</a></li>
+							<li><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>{{product.category}}</a></li>
+							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>{{product.title}}</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-7">
+					<div class="single_product_pics">
+						<div class="row">
+							<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
+								<div class="single_product_thumbnails">
+									<ul>
+										{% for item in product.organicproductimage_set.all %}
+											<li class="{% if forloop.second %}active{% endif %}">
+												<img src="{{item.imageURL}}" alt="" data-image="{{item.imageURL}}">
+											</li>
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+							<div class="col-lg-9 image_col order-lg-2 order-1">
+								<div class="single_product_image">
+									<div class="single_product_image_background">
+										<img src="{{product.imageURL}}" alt="" style="width: 100%; height: 300px; display: block;">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-5">
+					<div class="product_details">
+						<div class="product_details_title">
+							<h2>{{product.title}}</h2>
+							<p>Category: {{product.category}}</p>
+							<p>{{product.description}}</p>
+							<p>Available: {{product.available}}</p>
+							<p>Tags:
+                            {% for tag in product.tags.all %}
+                                <span class="badge badge-{{color|random}}">{{tag.title}}</span>
+							{% endfor %}
+							</p>
+						</div>
+						<div class="original_price">Rs{{product.price}}</div>
+						<div class="product_price">Rs{{product.price_after_discount}}</div>
+						<ul class="star_rating">
+							{% for rate in rating %}
+								<span class = "fa fa-star checked"></span>
+							{% endfor %}
+							{% if not_rated %}
+								{% for i in no_rating %}
+									<span class = "fa fa-star"></span>
+								{% endfor %}
+								<span>(no rating)</span>
+							{% else %}  
+								{% for i in no_rating %}
+									<span class = "fa fa-star"></span>
+								{% endfor %}  
+							{% endif %}  
+						</ul>
+						<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
+							<div>
+								<form method='POST' action="{% url 'carts:update' %}">
+									{% csrf_token %}
+									<input type="hidden" value="{{ product.id }}" name='products_id'>
+									<input type='hidden' name='qty' value='1'/>
+									<button class="btn btn-danger btn-md" type="submit" name='add'>
+										Add to Cart <i class = "fa fa-shopping-cart"></i>
+									</button>    
+								</form> 
+							</div>
+							<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+	<!-- Reviews -->
+	<div class="tabs_section_container" style="margin-top: -10px;">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="tabs_container">
+						<ul class="tabs d-flex flex-sm-row flex-column align-items-left align-items-md-center justify-content-center">
+							<li class="tab active" data-active-tab="tab_1"><span>Additional Information</span></li>
+							<li class="tab" data-active-tab="tab_2"><span>Reviews ({{comments.count}})</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<!-- Tab Additional Info -->
+					<div id="tab_1" class="tab_container active">
+						<div class="row">
+							<div class="col additional_info_col">
+								<div class="tab_title additional_info_title">
+									<h4>Additional Information</h4>
+								</div>
+								<p>COLOR:<span>{{product.color}}</span></p>
+								<p>SIZE:<span>{{product.size}}</span></p>
+								<p>
+									DESCRIPTION: <span>{{product.description}}</span>
+								</p>
+								
+							</div>
+						</div>
+					</div>
+
+					<!-- Tab Reviews -->
+					<div id="tab_2" class="tab_container">
+						<div class="row">
+							<div class="col-lg-6 reviews_col">	
+								<div class="tab_title reviews_title">
+									<h4>Reviews ({{comments.count}})</h4>
+								</div>
+								{% for comment in comments %}
+									<div class="user_review_container d-flex flex-column flex-sm-row">
+										<div class="user">
+											<div class="user_pic">
+												{% if comment.user.is_supplier %}
+												<img src="{{comment.user.supplierprofile.imageURL}}" alt="" style="width: 70px;">
+												{% elif comment.user.is_customer %}
+												<img src="{{comment.user.customerprofile.imageURL}}" alt="" style="width: 70px;">
+												{% elif comment.user.is_delivery_team %}
+												<img src="{{comment.user.deliveryteamprofile.imageURL}}" alt="" style="width: 70px;">
+												{% elif comment.user.is_manager %}
+												<img src="{{comment.user.manager.imageURL}}" alt="" style="width: 70px;">
+												{% endif %}
+											</div>
+											<div class="user_rating">
+												<ul class="star_rating">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+												</ul>
+											</div>
+										</div>
+										<div class="review">
+											<div class="review_date">
+												{% if comment.date_added %}
+													{{comment.date_added}}
+												{% else %} 
+													{{comment.date_updated}} edited
+												{% endif %}
+											</div>
+											<div class="user_name">{{comment.user.username}}</div>
+											<p>{{comment.body}}</p>
+											
+											<a href="">
+												<i class="fa fa-edit">edit</i>
+											</a>
+
+											<a data-toggle="collapse" href="#replyBox{{comment.id}}" role="button" aria-expanded="false" aria-controls="replyBox{{comment.id}}">
+												<i class="fa fa-reply">Reply</i>
+											</a>
+											<div class="collapse" id="replyBox{{comment.id}}">
+												{% if user.is_authenticated %}
+													<div class="card card-body mt-1">
+														<form action="{% url 'product:comment' %}" method="post">
+															{% csrf_token %}
+															<input type="hidden" value='{{comment.id}}' name='comment_id'>
+															<input type="hidden" value='{{product.id}}' name='product_id'>
+															<div class="row my-2">
+																<div class='col-md-6'>
+																	<textarea class='form-control' name="body" placeholder="Comment goes here" cols="30" rows="3" style="resize: none;">
+																	</textarea>
+																</div>
+															</div>
+															<button class="btn btn-info" type="submit">Submit</button>
+														</form>
+													</div>
+												{% else %}
+													<strong>Login to Post Comment</strong>  
+												{% endif %}      
+											</div>
+										</div>
+									</div>
+									<ul class="comments-list reply-list ml-5">
+										{% for value in reply|get_val:comment.id %}
+											<li>
+												<div class="user_review_container d-flex flex-column flex-sm-row">
+													<div class="user">
+														<div class="user_pic">
+															{% if comment.user.is_supplier %}
+															<img src="{{comment.user.supplierprofile.imageURL}}" alt="" style="width: 70px;">
+															{% elif comment.user.is_customer %}
+															<img src="{{comment.user.customerprofile.imageURL}}" alt="" style="width: 70px;">
+															{% elif comment.user.is_delivery_team %}
+															<img src="{{comment.user.deliveryteamprofile.imageURL}}" alt="" style="width: 70px;">
+															{% elif comment.user.is_manager %}
+															<img src="{{comment.user.manager.imageURL}}" alt="" style="width: 70px;">
+															{% endif %}
+														</div>
+														<div class="user_rating">
+															<ul class="star_rating">
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star" aria-hidden="true"></i></li>
+																<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+															</ul>
+														</div>
+													</div>
+													<div class="review">
+														<div class="review_date">
+															{% if value.date_added %}
+																{{value.date_added}}
+															{% else %}
+																{{value.date_updated}} edited	
+															{% endif %}
+														</div>
+														<div class="user_name">{{value.name}}</div>
+														<p>{{value.body}}</p>
+													</div>
+												</div>
+											</li>
+										{% endfor %}
+									</ul>
+								{% endfor %}	
+							</div>
+
+							<div class="col-lg-6 add_review_col">
+								<div class="add_review">
+									{% if messages %}
+										{% for message in messages %}
+											{{message}}
+										{% endfor %}
+									{% endif %}
+									<form id="review_form" action="{% url 'product:comment' %}" method="post">
+										{% csrf_token %}
+										<div>
+											<h1>Add Review</h1>
+										
+											<input type="hidden" value='{{product.id}}' name='product_id'>
+											<input type="hidden" value='' name='comment_id'>
+										</div>
+										{% if user.is_authenticated %}
+											<div>
+												<h1>Your Rating:</h1>
+												<ul class="user_star_rating">
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star" aria-hidden="true"></i></li>
+													<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+												</ul>
+												<textarea id="review_message" class="input_review" name="body"  placeholder="Your Review..." rows="4" required data-error="Please, leave us a review."></textarea>
+											</div>
+											<div class="text-left text-sm-right">
+												<button id="review_submit" type="submit" class="red_button review_submit_btn trans_300" value="Submit">submit</button>
+											</div>
+										{% else %}	
+											<strong>Login to Post Comment</strong>
+										{% endif %}
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Similar Items -->
+	<div class="container mt-5 mb-5">
+		<div class="top-content">
+			<div class="container-fluid">
+				<h4 style="color: red;"><u>Similar Items</u></h4>
+				
+				<div id="similar_items" class="carousel slide mt-5" data-ride="carousel">
+					<div class="carousel-inner row w-100 mx-auto" role="listbox">
+						{% if similar_items %}
+							{% for k,v in product_rating %}
+								<div class="carousel-item col-sm-6 col-md-6 col-lg-4 {% if forloop.first %}active{% endif %}">
+									<div class="card mb-2">
+										<a href="{% url 'product:detail' k.id %}">
+											<img src="{{k.imageURL}}" class="img-fluid mx-auto d-block" alt="img1">
+										</a>
+										<div class="card-body">
+											<p class="d-flex justify-content-center"><a href="" class="font-weight-bold black-text">{{k}}</a></p>
+											<p class="d-flex justify-content-center"><small class="mr-1"><s>Rs{{k.price}}</s></small>
+												<strong style='color: red'>Rs{{k.price_after_discount}}</strong>
+											</p> 
+											<p class="d-flex justify-content-center">
+												{% for i in v|get_checked_range:v %}
+												<span class = "fa fa-star checked"></span>    
+												{% endfor %}  
+												{% for i in v|get_unchecked_range:v %}
+												<span class = "fa fa-star"></span>
+												{% endfor %}  
+												<span class="ml-1">Rating({{v}})</span>
+											</p>
+											<div class="d-flex justify-content-center">
+												<form method='POST' action="{% url 'carts:update' %}">
+													{% csrf_token %}
+													<input type="hidden" value="{{k.id}}" name='products_id'>
+													<input type='hidden' name='qty' value='1'/>
+													<button class="btn btn-dark btn-rounded btn-sm px-3" type="submit" name='add'>
+														Buy Now <i class = "fa fa-shopping-cart"></i>
+													</button>    
+												</form>
+											</div>  
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+						{% endif %}		
+					</div>
+					<a class="carousel-control-prev" href="#similar_items" role="button" data-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="carousel-control-next" href="#similar_items" role="button" data-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+

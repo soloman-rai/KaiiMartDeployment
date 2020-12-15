@@ -1,0 +1,28 @@
+{% extends 'other_base.html' %}
+
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>User Status Update</title>
+{% endblock %}
+
+{% block main %}
+
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <h4 class="text-center">Supplier Application Form Update</h4>
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            {{form|crispy}}
+
+            <div class="d-flex justify-content-center">
+                <a href="{% url 'kadmin:users_list' %}" class="btn btn-info btn-md">Cancel</a>
+                <button type="submit" class="btn btn-dark btn-md">Update</button>
+            </div> 
+        </form>
+    </div>
+</main>  
+  
+{% endblock %}

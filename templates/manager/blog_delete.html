@@ -1,0 +1,25 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Delete Blog</title>{% endblock %}
+
+{% block main %}
+
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid mt-5">
+        <div class="row wow fadeIn">
+            <div class="card">
+                <div class="card-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <h4>Are You Sure You Want To Delete This Blog <strong>{{blogmodel.post_title}}</strong>?</h4>
+                        <br>
+                        <a href="{% url 'manager:blog_create' %}" class="btn btn-success btn-sm">Cancel</a>
+                        <button type="submit" class='btn btn-danger btn-sm'>Delete</button>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
+</main>
+
+{% endblock %}

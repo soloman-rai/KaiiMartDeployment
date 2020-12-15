@@ -1,0 +1,25 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Register Manager</title>{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block main %}
+
+<main class="pt-5 mx-lg-5">
+    <div class="container-fluid">
+        <h5>Are you sure you want to delete manager <strong>{{manager.username}}</strong></h5>
+        <div class='mt-5 p-3'>
+            <form action="" method="post">
+                {% csrf_token %}
+    
+                {{form|crispy}}
+    
+                <a class='btn btn-info' href="{% url 'kadmin:manager-list' %}">Cancel</a>
+                <button class='btn btn-danger' type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</main>    
+
+{% endblock %}

@@ -1,0 +1,6 @@
+seller_product/settings/local.py
+
+# Environments
+env/
+.env
+

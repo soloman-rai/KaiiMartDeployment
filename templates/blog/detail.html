@@ -1,0 +1,457 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load custom_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'coloshop/plugins/themify-icons/themify-icons.css' %}">
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    *, ::before, ::after {
+        box-sizing: inherit;
+    }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .breadcrumbs {
+        margin-top: 6em;
+        margin-bottom: 4em;
+        padding: 20px 0;
+    }
+    .breadcrumbs {
+        background-color: #F6F7FB;
+        position: relative;
+        padding: 30px 0px;
+    }
+    .container {
+        max-width: 1170px;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .blog-single .blog-single-main .image{
+        margin-bottom: 3em;
+    }
+    .blog-single .blog-single-main .image img{
+        width: 950px;
+        height: 460;
+        display: block;
+    }
+    .blog-single .blog-title {
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: capitalize;
+        margin: 40px 0 15px 0;
+    }
+    .blog-single .blog-meta {
+        margin-bottom: 0;
+        overflow: hidden;
+        border-bottom: 1px solid #dddddd6e;
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+    }
+    a {
+        color: inherit;
+    }
+    .blog-single .blog-meta span {
+        display: inline-block;
+        font-size: 14px;
+        color: #666;
+    }
+    .blog-single .blog-meta .author i {
+        color: #F7941D;
+        margin-right: 10px;
+        font-size: 13px;
+    }
+    .blog-single .blog-meta .author a:first-child {
+        padding-left: 0;
+    }
+    .blog-single .blog-meta .author a {
+        font-size: 13px;
+        border-right: 1px solid #ddd;
+        padding: 0px 15px;
+    }
+    .blog-single .content p { 
+        margin-bottom: 25px;
+        line-height: 26px;
+    }
+    p{
+        color: #757575;
+    }
+    .blog-single .share-social .content-tags {
+        position: relative;
+        margin-top: 25px;
+    }
+    .blog-single .share-social .content-tags h4 {
+        position: absolute;
+        left: 0;
+        top: 7px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .blog-single .share-social .content-tags .tag-inner {
+        padding-left: 60px;
+    }
+    .blog-single .share-social .content-tags .tag-inner li {
+        display: inline-block;
+        margin-right: 7px;
+        margin-bottom: 10px;
+        margin-top: 4px;
+    }
+    .blog-single .share-social .content-tags .tag-inner li a {
+        border-radius: 30px;
+        padding: 5px 15px;
+        background: #f4f7fc;
+        font-size: 13px;
+    }
+    .blog-single .comments {
+        margin-top: 40px;
+    }
+    .blog-single .comments .comment-title::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: -1px;
+        height: 100%;
+        width: 3px;
+        background: #F7941D;
+    }
+    .blog-single .comments .comment-title {
+        position: relative;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+        margin-bottom: 30px;
+        display: block;
+        background: #fff;
+        padding-left: 12px;
+    }
+    .blog-single .comments .single-comment {
+        position: relative;
+        margin-bottom: 40px;
+        border-radius: 5px;
+        padding-left: 95px;
+    }
+    .blog-single .comments .single-comment img {
+        height: 70px;
+        width: 70px;
+        border-radius: 100%;
+        position: absolute;
+        left: 0;
+    }
+    .blog-single .single-comment .content h4 {
+        color: #333;
+        font-size: 16px;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 18px;
+        text-transform: capitalize;
+    }
+    .blog-single .single-comment .content h4 span {
+        font-size: 13px;
+        color: #8D8D8D;
+        margin: 0;
+        font-weight: 400;
+        text-transform: capitalize;
+        display: block;
+        margin-top: 5px;
+    }
+    .blog-single .single-comment .content p {
+        color: #666;
+        font-weight: 400;
+        display: block;
+        margin: 0;
+        margin-bottom: 20px;
+        line-height: 22px;
+    }
+    .blog-single .single-comment .content .btn {
+        display: inline-block;
+        font-weight: 400;
+        color: #6a6a6a;
+        border-radius: 4px;
+        text-transform: capitalize;
+        font-size: 14px;
+        background: transparent;
+        padding: 0;
+    }
+    .blog-single .single-comment .content a i {
+        display: inline-block;
+        margin-right: 5px;
+    }
+    .blog-single .comments .single-comment.left {
+        margin-left: 110px;
+    }
+    .blog-single .reply .reply-title {
+        position: relative;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+        margin-bottom: 30px;
+        display: block;
+        background: #fff;
+        padding-left: 12px;
+    }
+    .blog-single .reply .reply-title::before {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: -1px;
+        height: 100%;
+        width: 3px;
+        background: #F7941D;
+    }
+    .blog-single .reply form {
+        padding: 40px;
+        border: 1px solid #eee;
+    }
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .blog-single .reply .form-group {
+        margin-bottom: 20px;
+    }
+    .blog-single .reply .form-group label {
+        color: #333;
+        position: relative;
+    }
+    label {
+        display: inline-block;
+        margin-bottom: .5rem;
+    }
+    .blog-single .reply .form-group label span {
+        color: #ff2c18;
+        display: inline-block;
+        position: absolute;
+        right: -12px;
+        top: 4px;
+        font-size: 16px;
+    }
+    .blog-single .reply .form-group input {
+        width: 100%;
+        height: 45px;
+        line-height: 50px;
+        padding: 0 20px;
+        border-radius: 0px;
+        color: #333 !important;
+        border: 1px solid #eee;
+    }
+    .blog-single .reply .form-group textarea {
+        width: 100%;
+        height: 200px;
+        line-height: 50px;
+        padding: 0 20px;
+        border-radius: 0px;
+        color: #333 !important;
+        border: none;
+        border: 1px solid #eee;
+    }
+    .blog-single .reply .button {
+        text-align: left;
+        margin-bottom: 0px;
+    }
+    .blog-single .reply .button .btn {
+        height: 50px;
+        border: none;
+    }
+    .btn {
+        position: relative;
+        font-weight: 500;
+        font-size: 14px;
+        color: #fff;
+        background: #333;
+        transition: all 0.4s ease;
+        z-index: 5;
+        display: inline-block;
+        padding: 13px 32px;
+        border-radius: 0px;
+        text-transform: uppercase;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block title %}
+<title>{{blog.post_title}}</title>
+{% endblock %}
+
+{% block main %}
+
+    <div class="mt-5"></div>
+
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="bread-inner">
+                        <a href="{% url 'home' %}">Home<i class="ti-arrow-right ml-2 mr-2"></i></a>
+                        <a href="{% url 'blog:home' %}">Blog<i class="ti-arrow-right ml-2 mr-2"></i></a>
+                        <a>{{blog.post_title}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Blog Single -->
+    <section class="blog-single section" style="margin-bottom: 90px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-12">
+                    <div class="blog-single-main">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="image">
+                                    {% if not blog.imageURL %}
+                                    <img src="https://via.placeholder.com/950x460" alt="#">
+                                    {% else %}
+                                    <img src="{{blog.imageURL}}" alt="#">
+                                    {% endif %}
+                                </div>
+                                <div class="blog-detail">
+                                    <h2 class="blog-title">{{blog.post_title}}</h2>
+                                    <div class="blog-meta">
+                                        <span class="author"><a href="#"><i class="fa fa-user"></i>By {{blog.author.username}}</a><a href="#"><i class="fa fa-calendar"></i>{{blog.posted_date}}</a><a href="#"><i class="fa fa-comments"></i>Comment ({{comments.count}})</a></span>
+                                    </div>
+                                    <div class="content">
+                                        <p>{{blog.post_text}}</p>
+                                    </div>
+                                </div>
+                                <div class="share-social">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="content-tags">
+                                                <h4>Tags:</h4>
+                                                <ul class="tag-inner">
+                                                    <li><a href="#">Glass</a></li>
+                                                    <li><a href="#">Pant</a></li>
+                                                    <li><a href="#">t-shirt</a></li>
+                                                    <li><a href="#">swater</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="comments">
+                                    <h3 class="comment-title">Comments ({{comments.count}})</h3>
+                                    {% for comment in comments %}
+                                        <div class="single-comment">
+                                            {% if comment.user.is_customer %}
+                                            <img src="{{comment.user.customerprofile.imageURL}}" alt="">
+                                            {% elif comment.user.is_supplier %}
+                                            <img src="{{comment.user.supplierprofile.imageURL}}" alt="">
+                                            {% elif comment.user.is_manager %}
+                                            <img src="{{comment.user.manager.imageURL}}" alt="">
+                                            {% elif comment.user.is_delivery_team %}
+                                            <img src="{{comment.user.deliveryteamprofile.imageURL}}" alt="">
+                                            {% endif %}
+                                            <div class="content">
+                                                <h4>{{comment.name}} <span>At {{comment.date_added}}</span></h4>
+                                                <p>{{comment.body}}</p>
+
+                                                <div class="button">
+                                                    <a data-toggle="collapse" href="#replyBox{{comment.id}}" class="btn" role="button" aria-expanded="false" aria-controls="replyBox{{comment.id}}">
+                                                        <i class="fa fa-reply">Reply</i>
+                                                    </a>
+                                                </div>
+
+                                                <div class="reply collapse" id="replyBox{{comment.id}}" style="margin-left: 10px">
+                                                    {% if user.is_authenticated %}
+                                                        <div class="card card-body mt-1">
+                                                            <form action="{% url 'blog:comment' %}" method="post">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" value='{{comment.id}}' name='comment_id'>
+                                                                <input type="hidden" value='{{blog.id}}' name='blog_id'>
+                                                                <div class="row my-2">
+                                                                    <div class='col-md-6'>
+                                                                        <textarea class='form-control' name="body" placeholder="Comment goes here" cols="30" rows="3" style="resize: none;">
+                                                                        </textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <button class="btn btn-info" type="submit">Submit</button>
+                                                            </form>
+                                                        </div>
+                                                    {% else %}
+                                                        <strong>Login to Post Comment</strong>  
+                                                    {% endif %}      
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% for value in reply|get_val:comment.id %}
+                                        <div class="single-comment left">
+                                            {% if comment.user.is_customer %}
+                                            <img src="{{comment.user.customerprofile.imageURL}}" alt="">
+                                            {% elif comment.user.is_supplier %}
+                                            <img src="{{comment.user.supplierprofile.imageURL}}" alt="">
+                                            {% elif comment.user.is_manager %}
+                                            <img src="{{comment.user.manager.imageURL}}" alt="">
+                                            {% elif comment.user.is_delivery_team %}
+                                            <img src="{{comment.user.deliveryteamprofile.imageURL}}" alt="">
+                                            {% endif %}
+                                            <div class="content">
+                                                <h4>{{value.name}} <span>{{value.date_added}}</span></h4>
+                                                <p>{{value.body}}</p>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    {% endfor %}
+                                </div>									
+                            </div>											
+                            <div class="col-12">			
+                                <div class="reply">
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                            {{message}}
+                                        {% endfor %}
+                                    {% endif %}
+                                    <div class="reply-head">
+                                        <h2 class="reply-title">Leave a Comment</h2>
+                                        <form class="form" action="{% url 'blog:comment' %}" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" value='{{blog.id}}' name='blog_id'>
+                                            <input type="hidden" value='' name='comment_id'>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label>Your Message<span>*</span></label>
+                                                        <textarea name='body' placeholder=""></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group button">
+                                                        <button type="submit" class="btn">Post comment</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>			
+                            </div>			
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

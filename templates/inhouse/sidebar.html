@@ -1,0 +1,81 @@
+<header>     
+    <div class="sidebar-fixed position-fixed">
+        <a class="logo-wrapper waves-effect">
+            {% if user.is_admin %}
+            <img src="{{user.admin.imageURL}}" class="img-fluid" alt="">
+            {% elif user.is_manager %}
+            <img src="{{user.manager.imageURL}}" class="img-fluid" alt="">
+            {% elif user.is_delivery_team %}
+            <img src="{{user.deliveryteamprofile.imageURL}}" class="img-fluid" alt="">
+            {% endif %}
+        </a>
+        <div class="d-flex justify-content-center mb-3">
+            <h4 style="color: #9042f5; font-weight: 700;">{{user.username}}</h4>
+        </div>
+        <div class="list-group list-group-flush">
+            {% if user.is_manager %}
+                <a href="{% url 'manager:home' %}" class="list-group-item active waves-effect"
+                 style="background-color: teal; margin-bottom: 30px;">
+                    <i class="fa fa-pie-chart mr-3"></i>Dashboard
+                </a>
+                <a href="{% url 'manager:home_sliders' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-sliders-h mr-3"></i>Home Main Sliders
+                </a>
+                <a href="{% url 'manager:our_products_are' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-info mr-3"></i>Our Product Info
+                </a>
+                <a href="{% url 'manager:product_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-shopping-bag mr-3"></i>Products
+                </a>
+                <a href="{% url 'manager:supplier_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-user mr-3"></i>Suppliers
+                </a>
+                <a href="{% url 'manager:supplier_waiting_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-user mr-3"></i>Supplier Waiting List
+                </a>
+                <a href="{% url 'manager:delivery_team_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-user mr-3"></i>Delivery Team
+                </a>
+                <a href="{% url 'manager:tag_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-tag mr-3"></i>Tags
+                </a>
+                <a href="{% url 'manager:category_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-list mr-3"></i>Categories
+                </a>
+                <a href="{% url 'manager:blog_create' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-list mr-3"></i>Blogs
+                </a>
+            {% elif user.is_admin %}
+                <a href="{% url 'kadmin:home' %}" class="list-group-item active waves-effect">
+                    <i class="fa fa-pie-chart mr-3"></i>Dashboard
+                </a>
+                <a href="{% url 'kadmin:manager-list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-table mr-3"></i>Manager
+                </a>
+                <a href="{% url 'kadmin:users_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-table mr-3"></i>Users status
+                </a>
+            {% elif user.is_delivery_team %}
+                <a href="{% url 'delivery:home' %}" class="list-group-item active waves-effect">
+                    <i class="fa fa-pie-chart mr-3"></i>Dashboard
+                </a>
+            {% endif %}
+        </div>
+       
+        {% if user.is_manager %}
+        <a href="{% url 'manager:settings' %}" class="list-group-item list-group-item-action waves-effect"
+            style="margin-top: 30px;">
+            <i class="fa fa-cogs mr-3"></i>Settings
+        </a>
+        {% elif user.is_delivery %}
+        <a href="{% url 'delivery:settings' %}" class="list-group-item list-group-item-action waves-effect"
+            style="margin-top: 30px;">
+            <i class="fa fa-cogs mr-3"></i>Settings
+        </a>
+        {% endif %}
+        <a href="{% url 'logout' %}" class="list-group-item list-group-item-action waves-effect"
+            style="background-color: orange; margin-top: 30px;">
+            <i class="fa fa-sign-out-alt mr-3"></i>Logout
+        </a>
+    </div>
+</header>
