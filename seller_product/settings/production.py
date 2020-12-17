@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
+# import dj_database_url
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'GauravD.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'seller_product.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': config('DB_NAME'),
         'HOST': config('DB_HOST'),
         'PORT': config('DB_PORT'),
@@ -153,7 +153,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-# LOGIN_REDIRECT_URL = 'home'     # url redirecting after successful authentication
+LOGIN_REDIRECT_URL = 'home'     # url redirecting after successful authentication
 LOGOUT_REDIRECT_URL = 'home'
 
 
@@ -168,3 +168,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_URL=''
 SITE_NAME=''
+
