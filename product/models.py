@@ -151,7 +151,7 @@ class Product(models.Model):
 
     slug = models.SlugField(max_length=100, unique=True)
 
-    is_namuna_falful = models .BooleanField(default=False)
+    is_namuna_falful = models.BooleanField('Namuna Falful', default=False)
     supplier = models.ForeignKey(USER, on_delete=models.SET_NULL, null=True)
 
     season_choice = models.CharField(choices=SEASON_CHOICES, max_length=10, default='any')

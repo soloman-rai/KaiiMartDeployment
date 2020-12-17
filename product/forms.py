@@ -13,7 +13,7 @@ class ProductCreateForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['category', 'title', 'price', 'description', 'image', 'video', 'discount_price',
-                    'season_choice']
+                    'season_choice', 'is_namuna_falful']
 
         widgets = {
             "title": forms.TextInput(attrs={

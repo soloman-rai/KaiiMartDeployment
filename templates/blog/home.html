@@ -9,9 +9,9 @@
 {% block main %}
   
     <section class="bg-title-page p-t-40 p-b-50 flex-col-c-m"
-        style="background-image: url(../static/img/together_we_create.jpg);">
+        style="background-image: url('https://images.unsplash.com/photo-1569852118044-f57df8b4f0cf?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1924&q=80');">
         <h2 class="l-text2 t-center">
-            Blog
+            Welcome to Our Blog Section
         </h2>
     </section>
 
@@ -25,7 +25,7 @@
 							<a href="" class="item-blog-img pos-relative dis-block hov-img-zoom">
 								<img src="{{post.imageURL}}" alt="IMG-BLOG">
 
-								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1">
+								<span class="item-blog-date dis-block flex-c-m pos1 size17 bg4 s-text1 ml-5">
 									{% if not post.updated_date %}
 										{{post.posted_date}}
 									{% else %}
@@ -43,7 +43,7 @@
 
 								<div class="s-text8 flex-w flex-m p-b-21">
 									<span>
-										By Admin
+										By {{post.author.username}}
 										<span class="m-l-3 m-r-6">|</span> 
 									</span>
 									<span>
@@ -83,12 +83,11 @@
 						<ul>
 							<li class="p-t-6 p-b-8 bo6">
 								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Fashion
-								</a>
+									Fruits
 							</li>
 							<li class="p-t-6 p-b-8 bo7">
 								<a href="#" class="s-text13 p-t-5 p-b-5">
-									Beauty
+									Veggies
 								</a>
 							</li>
 						</ul>
@@ -142,11 +141,11 @@
 
 						<div class="wrap-tags flex-w">
 							<a href="#" class="tag-item">
-								Fashion
+								Organic
 							</a>
 
 							<a href="#" class="tag-item">
-								Lifestyle
+								Fresh
 							</a>
 						</div>
 					</div>

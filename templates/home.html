@@ -39,8 +39,14 @@
                       <div class="product discount">
                         <a href="{% url 'product:detail' item.id %}">
                           <div class="product_image">
+                            
+                            {% if item.imageURL %}
                             <img src="{{item.imageURL}}" alt="" 
-                            style="width: 200px; height: 200px; display: block; margin: 0 auto;">
+                            style="display: block; margin: 0 auto;">
+                            {% else %}
+                            <img src="https://images.unsplash.com/photo-1490885578174-acda8905c2c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80" alt=""
+                            style="display: block; margin: 0 auto;">
+                            {% endif %}
                           </div>
                         </a>
             
@@ -77,8 +83,13 @@
           {% for item in category %}
             <div class="col-md-4 mt-3">
               <a href="{% url 'product:cat-product' item.id %}">
-                <div class="banner_item align-items-center" style="background-image:url({{item.imageURL}})">
-                </div>
+                
+                {% if item.imageURL %}
+                <div class="banner_item align-items-center" style="background-image:url({{item.imageURL}})"></div>
+                {% else %}
+                <div class="banner_item align-items-center" style="background-image:url('https://images.unsplash.com/photo-1600261100972-05d0ed3c3efb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80');"></div>
+                {% endif %}
+                
               </a>
               <div class="banner_category">
                 <a href="{% url 'product:cat-product' item.id %}">{{item.title}}</a>
@@ -115,13 +126,13 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="deal_ofthe_week_img">
-              <img src="images/deal_ofthe_week.png" alt="">
+              <img src="https://images.unsplash.com/photo-1577926050848-c042a74219d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="" class="img-fluid" height="100%" width="100%">
             </div>
           </div>
           <div class="col-lg-6 text-right deal_ofthe_week_col">
             <div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
               <div class="section_title">
-                <h2>Deal Of The Week</h2>
+                <h2 class="bg-light p-3">Deal Of The Week</h2>
               </div>
               <ul class="timer">
                 <li class="d-inline-flex flex-column justify-content-center align-items-center">
@@ -168,8 +179,13 @@
                       <div class="product discount">
                         <a href="{% url 'product:detail' item.id %}">
                           <div class="product_image">
+                            {% if item.imageURL %}
                             <img src="{{item.imageURL}}" alt="" 
-                            style="width: 200px; height: 200px; display: block; margin: 0 auto;">
+                            style=" display: block; margin: 0 auto;">
+                            {% else %}
+                            <img src="https://images.unsplash.com/photo-1490885578174-acda8905c2c6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1649&q=80" alt=""
+                            style=" display: block; margin: 0 auto;" >
+                            {% endif %}
                           </div>
                         </a>
             
@@ -292,7 +308,7 @@
     </div>
     
     <!-- Want to be supplier in KaiiMart -->
-    <div class="newsletter" style="background: #44ad79;">
+    <div class="newsletter" style="background: orange;">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
@@ -303,7 +319,7 @@
           </div>
           <div class="col-lg-6">
             <div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-              <a style='color: white;' href="{% url 'supplierform' %}" class='newsletter_submit_btn trans_300 text-center p-2'>Be Supplier</a>
+              <a style='color: white;' href="{% url 'supplierform' %}" class='btn newsletter_submit_btn trans_300 text-center p-2'>Be Our Supplier</a>
             </div>
           </div>  
         </div>
