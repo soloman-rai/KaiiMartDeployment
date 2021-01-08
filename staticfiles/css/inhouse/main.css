@@ -24,7 +24,7 @@
     padding-left:270px
   }
 }
-@media (max-width:1199.98px){
+@media (max-width:500px){
   .sidebar-fixed{
     display:none
   }

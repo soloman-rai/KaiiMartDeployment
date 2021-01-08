@@ -6,110 +6,107 @@
 
 
 {% block main %}
-
-    <main class="pt-5 mx-lg-5">
-        <div class="container-fluid mt-5">
-            <div class="row wow fadeIn">
-                <div class="col-6">
-                    <div class="card card-list">
-                        <div class="card-header white d-flex justify-content-between align-items-center py-3">
-                            <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{confirmed_qs.count}}</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center mb-5">
-                                <strong>Latest Confirm Orders</strong>
-                            </div>
-                            <table class="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Orders</th>
-                                <th scope="col">Status</th>
-                                <th scope="col"></th>
-                                <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in confirmed_qs %}
-                                    <tr>
-                                    <th scope="row"><a href="{% url 'delivery:detail' item.id %}" class="text-primary">{{item}}</a></th>
-                                    <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
-                                    <th></th>
-                                    <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                            </table>
-                        </div>
-                    </div> 
+<div class="container-fluid mt-5">
+    <div class="row wow fadeIn">
+        <div class="col-md-10 mb-5 m">
+            <div class="card card-list">
+                <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                    <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{confirmed_qs.count}}</p>
                 </div>
-                <div class="col-6">
-                    <div class="card card-list">
-                        <div class="card-header white d-flex justify-content-between align-items-center py-3">
-                            <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{delivered_qs.count}}</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center mb-5">
-                                <strong>Latest Delivered Orders</strong>
-                            </div>
-                            <table class="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Orders</th>
-                                <th scope="col">Status</th>
-                                <th scope="col"></th>
-                                <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in delivered_qs %}
-                                    <tr>
-                                    <th scope="row"><a class="text-primary">{{item}}</a></th>
-                                    <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
-                                    <th></th>
-                                    <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                            </table>
-                        </div>
-                    </div> 
+                <div class="card-body">
+                    <div class="text-center mb-5">
+                        <strong>Latest Confirm Orders</strong>
+                    </div>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Orders</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                        <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in confirmed_qs %}
+                            <tr>
+                            <th scope="row"><a href="{% url 'delivery:detail' item.id %}" class="text-primary">{{item}}</a></th>
+                            <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
+                            <th></th>
+                            <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="row wow fadeIn mt-4">
-                <div class="col-6">
-                    <div class="card card-list">
-                        <div class="card-header white d-flex justify-content-between align-items-center py-3">
-                            <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{refunded_qs.count}}</p>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center mb-5">
-                                <strong>Latest Refunded Orders</strong>
-                            </div>
-                            <table class="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Orders</th>
-                                <th scope="col">Status</th>
-                                <th scope="col"></th>
-                                <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in refunded_qs %}
-                                    <tr>
-                                    <th scope="row"><a class="text-primary">{{item}}</a></th>
-                                    <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
-                                    <th></th>
-                                    <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                            </table>
-                        </div>
-                    </div> 
-                </div>
-            </div>
+            </div> 
         </div>
-    </main>
+        <div class="col-md-10 mb-5">
+            <div class="card card-list">
+                <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                    <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{delivered_qs.count}}</p>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-5">
+                        <strong>Latest Delivered Orders</strong>
+                    </div>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Orders</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                        <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in delivered_qs %}
+                            <tr>
+                            <th scope="row"><a class="text-primary">{{item}}</a></th>
+                            <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
+                            <th></th>
+                            <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div class="row wow fadeIn mt-4">
+        <div class="col-md-10 mb-5">
+            <div class="card card-list">
+                <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                    <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{refunded_qs.count}}</p>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-5">
+                        <strong>Latest Refunded Orders</strong>
+                    </div>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">Orders</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                        <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in refunded_qs %}
+                            <tr>
+                            <th scope="row"><a class="text-primary">{{item}}</a></th>
+                            <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
+                            <th></th>
+                            <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
 
 {% endblock %}

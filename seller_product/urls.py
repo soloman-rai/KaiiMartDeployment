@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 
 from product.views import home_view
 from accounts.views import login_view
@@ -36,6 +37,7 @@ admin.site.index_title  = 'Welcome To Kai Admin Panel'
 
 #Main URL
 urlpatterns = [
+    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
     path('product/', include('product.urls', namespace='product')),
@@ -51,8 +53,8 @@ urlpatterns = [
     path('kadmin/', include('Kadmin.urls', namespace='kadmin')),
     path('blog/', include('blog.urls', namespace='blog')),
 
-    path('pwdcge/', PasswordChangeView.as_view(),name='password_change'),
-    path('pwdcge/done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('pwdcge/', PasswordChangeView.as_view(template_name='utils/change_password.html'),name='password_change'),
+    path('pwdcge/done/', PasswordChangeDoneView.as_view(template_name='utils/password_change_done.html'), name='password_change_done'),
     path('pwd/reset/', PasswordResetView.as_view(),name='password_reset'),
     path('pwd_reset/done/', PasswordResetDoneView.as_view(),name='password_reset_done'),
     path('reset/<str:uidb64>/<str:token>', PasswordResetConfirmView.as_view(),name='password_reset_confirm'),

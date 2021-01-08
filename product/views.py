@@ -32,7 +32,7 @@ def home_view(request):
     #Home Slider
     slider = HomeTopSlider.objects.all()
     #nyano organic
-    organic = Product.objects.filter(is_namuna_falful=True)[:8]
+    organic = Product.objects.filter(is_organic_store=True)[:8]
     #Categories
     category = Category.objects.all()
     #Our Products Are
@@ -61,19 +61,19 @@ def home_view(request):
     return render(request, 'home.html', context)
 
 
-class NamunaFalfulListView(ListView):
+class organicstoreListView(ListView):
     model = Product
-    template_name = 'product/namuna_falful.html'
+    template_name = 'product/organic_store.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs = Product.objects.filter(is_namuna_falful=True)
-        context['namuna_falful'] = qs
+        qs = Product.objects.filter(is_organic_store=True)
+        context['organic_store'] = qs
         return context
 
 
-def namuna_falful_detail(request, pk):
-    product = Product.objects.get(id=pk, is_namuna_falful=True)
+def organic_store_detail(request, pk):
+    product = Product.objects.get(id=pk, is_organic_store=True)
     
     ##Rafactor Rating Code if possible
     #Product Rating On Product Detail
@@ -142,7 +142,7 @@ def namuna_falful_detail(request, pk):
         'similar_items': similar_products,
         'product_rating': product_and_rating.items(),
     }
-    return render(request, 'product/namuna_falful_detail.html', context)
+    return render(request, 'product/organic_store_detail.html', context)
 
 #Shop Page View
 def shop_page_view(request):

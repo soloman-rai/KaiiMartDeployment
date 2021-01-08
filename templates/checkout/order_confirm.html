@@ -43,11 +43,20 @@
                 </p>
             </div>
 
+            <div class="text-center mt-3">
+                <a href="{% url 'orders:esewa-request' id=order.order_id %}">
+                    <button class="btn btn-info mr-3">Pay with Esewa<i class="fa fa-money ml-2"></i></button>
+                </a>
+                <a href="{% url 'orders:esewa-request' id=order.order_id %}">
+                    <button class="btn btn-info">Pay with Khalti<i class="fa fa-money ml-2"></i></button>
+                </a>
+            </div>
+
             <form action="{% url 'orders:final' %}" method="post">
                 {% csrf_token %}
                 <div class="text-center py-4 mt-3">
-                    <button class="btn btn-info" type="submit" name='confirm'>Confirm Order<i
-                        class="fa fa-send ml-2"></i>
+                    <button class="btn btn-info" type="submit" name='confirm'>Cash on Delivery
+                        <i class="fa fa-send ml-2"></i>
                     </button>
                 </div>
             </form>  

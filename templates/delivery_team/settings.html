@@ -3,17 +3,17 @@
 {% block title %}<title>Settings</title>{% endblock %}
 
 {% block main %}
-
-<main class="pt-5 mx-lg-5">
-    <div class="container-fluid mt-5">
-        <ul>
-            <li>
-                <strong>Change Password</strong>
-                <br>
-                <a class="btn btn-info mt-3" href="{% url 'password_change' %}">Change</a>
-            </li>
-        </ul>    
-    </div>
-  </main> 
+<div class="container-fluid mt-5">
+    <ul>
+        <li class="mb-3">
+            <a class="btn btn-info mt-3" href="{% url 'delivery:profile' %}">My Profile</a>
+        </li>
+        <li>
+            <strong>Change Password</strong>
+            <br>
+            <a class="btn btn-info mt-3" href="{% url 'password_change' %}">Change</a>
+        </li>
+    </ul>    
+</div>
 
 {% endblock %}

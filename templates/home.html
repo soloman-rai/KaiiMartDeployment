@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}<title>KaiMart</title>{% endblock %}
+{% block title %}<title>KaiiMart</title>{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/home_main_slider.css' %}">
@@ -16,6 +16,12 @@
 
   <div class="super_container">
 
+    {% if messages %}
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    {% endif %}
+
     <!-- Slider -->
     {% include 'sliders.html' %}
   
@@ -25,7 +31,7 @@
         <div class="row">
           <div class="col text-center">
             <div class="section_title new_arrivals_title">
-              <h2 style="color: red;">Namuna Falful</h2>
+              <h2 style="color: red;">Organic Store</h2>
             </div>
           </div>
         </div>
@@ -222,8 +228,8 @@
             <div class="benefit_item d-flex flex-row align-items-center">
               <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
               <div class="benefit_content">
-                <h6>free shipping</h6>
-                <p>Suffered Alteration in Some Form</p>
+                <h6>Fast Delivery</h6>
+                <p>Time is money!</p>
               </div>
             </div>
           </div>
@@ -231,8 +237,8 @@
             <div class="benefit_item d-flex flex-row align-items-center">
               <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
               <div class="benefit_content">
-                <h6>cach on delivery</h6>
-                <p>The Internet Tend To Repeat</p>
+                <h6>Cash on delivery</h6>
+                <p>Pay after you receive.</p>
               </div>
             </div>
           </div>
@@ -240,8 +246,8 @@
             <div class="benefit_item d-flex flex-row align-items-center">
               <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
               <div class="benefit_content">
-                <h6>45 days return</h6>
-                <p>Making it Look Like Readable</p>
+                <h6>Product Return Policy</h6>
+                <p>We've got your back!</p>
               </div>
             </div>
           </div>
@@ -250,7 +256,7 @@
               <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
               <div class="benefit_content">
                 <h6>opening all week</h6>
-                <p>8AM - 09PM</p>
+                <p>8 AM - 9 PM</p>
               </div>
             </div>
           </div>
@@ -292,7 +298,7 @@
           <div class="col-lg-6">
             <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
               <h4>Newsletter</h4>
-              <p>Subscribe to our newsletter and get 20% off your first purchase</p>
+              <p>Subscribe to our newsletter and get 20% off on your first purchase</p>
             </div>
           </div>
           <div class="col-lg-6">
@@ -314,7 +320,7 @@
           <div class="col-lg-6">
             <div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
               <h4>Want to be Supplier?</h4>
-              <p>Fill the form by clicking in button</p>
+              <p>Fill the form by clicking the button and we'll get back to you soon.</p>
             </div>
           </div>
           <div class="col-lg-6">

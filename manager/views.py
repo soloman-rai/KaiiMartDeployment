@@ -366,9 +366,9 @@ class SupplierFormView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs_waiting = SupplierForm.objects.filter(status='Waiting').order_by('-id')
-        qs_ignored = SupplierForm.objects.filter(status='Ignore').order_by('-id')
-        qs_accepted = SupplierForm.objects.filter(status='Accept').order_by('-id')
+        qs_waiting = SupplierForm.objects.filter(status='waiting').order_by('-id')
+        qs_ignored = SupplierForm.objects.filter(status='ignore').order_by('-id')
+        qs_accepted = SupplierForm.objects.filter(status='accept').order_by('-id')
         context['status_waiting'] = qs_waiting
         context['status_ignored'] = qs_ignored
         context['status_accepted'] = qs_accepted

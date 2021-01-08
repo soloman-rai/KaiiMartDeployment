@@ -10,8 +10,8 @@
           <nav class="navbar">
             <ul class="navbar_menu mr-3">
               {% if not user.is_manager and not user.is_admin and not user.is_delivery_team %}
-              <li><a href="{% url 'product:namuna_falful' %}">namuna falful</a></li>
-              <li><a href="{% url 'product:shop_page' %}">shop</a></li>
+              <li><a href="{% url 'product:organic_store' %}">Organic store</a></li>
+              <li><a href="{% url 'product:shop_page' %}">Shop</a></li>
               {% endif %}
               {% if user.is_authenticated and user.supplierprofile %}
               <li><a href="{% url 'product:create' %}">Add Product</a></li>
@@ -27,7 +27,7 @@
 
             <ul class="navbar_user">
               {% if user.is_anonymous %}
-              <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+              <li><a href="{% url 'login' %}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
               {% elif user.is_customer %}
               <li>
                 
@@ -82,9 +82,11 @@
               </li>
               {% endif %}
             </ul>
-            <div class="hamburger_container" style="display: block;">
+            <ul class="navbar_user">
+            <li class="hamburger_container">
               <i class="fa fa-bars" aria-hidden="true"></i>
-            </div>
+            </li>
+            </ul>
           </nav>
         </div>
       </div>  
@@ -103,27 +105,27 @@
         </form>
       </li>
         
-      <li class="menu_item"><a href="{% url 'home' %}">home</a></li>
-      <li class="menu_item"><a href="">namuna falful</a></li>
-      <li class="menu_item"><a href="{% url 'product:shop_page' %}">shop</a></li>
-      <li class="menu_item"><a href="{% url 'blog:home' %}">blog</a></li>
-      <li class="menu_item"><a href="#">contact</a></li>
+      <li class="menu_item"><a href="{% url 'home' %}"><i class="fa fa-home mr-2"></i>Home</a></li>
+      <li class="menu_item"><a href=""><i class="fa fa-shopping-basket mr-2"></i>organic store</a></li>
+      <li class="menu_item"><a href="{% url 'product:shop_page' %}"><i class="fa fa-shopping-cart mr-2"></i>shop</a></li>
+      <li class="menu_item"><a href="{% url 'blog:home' %}"><i class="fa fa-bars mr-2"></i>blog</a></li>
+      <li class="menu_item"><a href="#"><i class="fa fa-address-book mr-2"></i>contact</a></li>
       
       {% if user.is_authenticated and user.supplierprofile %}
-      <li class="menu_item"><a href="{% url 'product:create' %}">Add Product</a></li>
+      <li class="menu_item"><a href="{% url 'product:create' %}"><i class="fa fa-plus-square mr-2" aria-hidden="true"></i>Add Product</a></li>
       {% endif %}
 
       {% if user.is_anonymous %} 
       <li class="menu_item">
-        <a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>LogIn</a>
+        <a href="{% url 'login' %}"><i class="fa fa-sign-in mr-2" aria-hidden="true"></i>LogIn</a>
       </li>
       <li class="menu_item">
         <a href="{% url 'customer:register' %}">
-          <i class="fa fa-user-plus" aria-hidden="true"></i>Register
+          <i class="fa fa-user-plus mr-2" aria-hidden="true"></i>Register
         </a>
       </li>
       {% else %}
-      <li class="menu_item"><a href="{% url 'logout' %}">Logout</a></li>
+      <li class="menu_item"><a href="{% url 'logout' %}"><i class="fa fa-sign-out mr-2" aria-hidden="true"></i>Logout</a></li>
       {% endif %}
     </ul>
   </div>
