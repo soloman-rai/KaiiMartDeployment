@@ -43,8 +43,7 @@ class CustomerProfileEditForm(forms.ModelForm):
         exclude = ('user',)
 
         widgets = {
-            "dob": forms.TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "YYYY-MM-DD"
-            }),
+        'dob': forms.DateInput(
+            # format=('%m/%d/%Y'), 
+            attrs={'class':'form-control', 'placeholder':'Select your birth date', 'type':'date'}),
         }

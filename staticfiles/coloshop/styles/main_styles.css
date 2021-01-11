@@ -395,7 +395,6 @@ section
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	width: 40px;
 	height: 40px;
 	color: #1e1e27;
 	-webkit-transition: color 0.3s ease;

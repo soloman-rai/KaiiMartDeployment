@@ -27,7 +27,7 @@
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
 						<li><a href="{% url 'home' %}">Home</a></li>
-						<li class="active"><a><i class="fa fa-angle-right" aria-hidden="true"></i>Organic Store</a></li>
+						<li class="active"><a><i class="fa fa-angle-right" aria-hidden="true"></i>Organic Station</a></li>
 					</ul>
 				</div>
 
@@ -37,7 +37,7 @@
 						<div class="row">
 							<div class="col">
 								<div class="product-grid">
-									{% for item in organic_store %}
+									{% for item in organic_station %}
 									<div class="product-item" style="margin-top: 20px;">
 										<div class="product discount product_filter">
 											<a href="{% url 'product:organic_detail' item.id %}">
@@ -46,7 +46,7 @@
 												</div>
 											</a>
 											<div class="favorite favorite_left"></div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>New</span></div>
 											<div class="product_info">
 												<h6 class="product_name"><a href="{% url 'product:organic_detail' item.id %}">{{item.title}}</a></h6>
 												<div class="product_price">Rs{{item.price_after_discount}}<span>Rs{{item.price}}</span></div>

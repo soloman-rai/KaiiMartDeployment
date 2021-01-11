@@ -1,16 +1,18 @@
+{% load static %}
 <header class="header trans_300">
   <div class="main_nav_container fixed-top">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-right">
-          <div class="logo_container">
-            <a href="{% url 'home' %}"><strong>kaii<span style="color: orange;">mart</span></strong></a> 
+          <div class="logo_container img-fluid">
+            <!-- <a href="{% url 'home' %}"><strong>kaii<span style="color: orange;">mart</span></strong></a>  -->
+            <a href="{% url 'home' %}"><img src="{% static 'img/KaiiMart.png' %}" class="img-fluid" height="70px" width="70px"  alt="Kaii Mart's Logo"></a> 
           </div>
        
           <nav class="navbar">
             <ul class="navbar_menu mr-3">
               {% if not user.is_manager and not user.is_admin and not user.is_delivery_team %}
-              <li><a href="{% url 'product:organic_store' %}">Organic store</a></li>
+              <li><a href="{% url 'product:organic_station' %}">Organic Station</a></li>
               <li><a href="{% url 'product:shop_page' %}">Shop</a></li>
               {% endif %}
               {% if user.is_authenticated and user.supplierprofile %}
@@ -29,49 +31,48 @@
               {% if user.is_anonymous %}
               <li><a href="{% url 'login' %}"><i class="fa fa-user" aria-hidden="true"></i></a></li>
               {% elif user.is_customer %}
-              <li>
-                
+              <li class="nav-item avatar dropdown">  
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"> 
                 {% if user.customerprofile.imageURL %}
                 <img src="{{user.customerprofile.imageURL}}" class="rounded-circle z-depth-0"
                 alt="avatar" height="25" width='25'>
                 {% else %}
                 <i class="fa fa-user mr-1"></i>{{user.username}}
                 {% endif %}  
-              </li>
-              <li class="nav-item avatar dropdown">  
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary text-center"
                   aria-labelledby="navbarDropdownMenuLink-55">
-                    <a style="padding-left: 3rem;" href="{% url 'customer:home' %}">Profile</a>
-                    <a style="padding-left: 3rem;" href="{% url 'customer:setting' %}">Settings</a>
-                    <a style="padding-left: 3rem;" href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'customer:home' %}">Profile</a>
+                    <a href="{% url 'customer:setting' %}">Settings</a>
+                    <a href="{% url 'logout' %}">Logout</a>
                 </div>
               </li>
               {% elif user.is_supplier %}
-              <li>
-                <img src="{{user.supplierprofile.imageURL}}" class="rounded-circle z-depth-0"
-                alt="avatar" height="35">
-              </li>
               <li class="nav-item avatar dropdown">  
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
+                {% if user.supplierprofile.imageURL %}
+                <img src="{{user.supplierprofile.imageURL}}" class="rounded-circle z-depth-0"
+                alt="avatar" height="25" width='25'>
+                {% else %}
+                <i class="fa fa-user mr-1"></i>{{user.username}}
+                {% endif %}  
                 </a>
-                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary text-center"
                   aria-labelledby="navbarDropdownMenuLink-55">
-                  <a style="padding-left: 3rem;" href="{% url 'seller:home' %}">Profile</a>
-                  <a style="padding-left: 3rem;" href="{% url 'product:all_products' email=user %}">My Products</a>
-                  <a style="padding-left: 3rem;" href="{% url 'seller:setting' %}">Settings</a>
-                  <a style="padding-left: 3rem;" href="{% url 'logout' %}">Logout</a>
+                  <a href="{% url 'seller:home' %}">Profile</a>
+                  <a href="{% url 'product:all_products' email=user %}">My Products</a>
+                  <a href="{% url 'seller:setting' %}">Settings</a>
+                  <a href="{% url 'logout' %}">Logout</a>
                 </div>
               </li>
               {% endif %}
 
               {% if user.is_supplier or user.is_customer or user.is_anonymous %}
-              <li class="checkout">
+              <li class="checkout ml-4">
                 <a href="{% url 'carts:home' %}">
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i class="fa fa-shopping-cart p-3 py-5" aria-hidden="true"></i>
                   <span id="checkout_items" class="checkout_items">2</span>
                   {% if request.session.items_total %}
                   <span id="checkout_items" class="checkout_items"> {{request.session.items_total}}</span>
@@ -106,7 +107,7 @@
       </li>
         
       <li class="menu_item"><a href="{% url 'home' %}"><i class="fa fa-home mr-2"></i>Home</a></li>
-      <li class="menu_item"><a href=""><i class="fa fa-shopping-basket mr-2"></i>organic store</a></li>
+      <li class="menu_item"><a href=""><i class="fa fa-shopping-basket mr-2"></i>Organic Station</a></li>
       <li class="menu_item"><a href="{% url 'product:shop_page' %}"><i class="fa fa-shopping-cart mr-2"></i>shop</a></li>
       <li class="menu_item"><a href="{% url 'blog:home' %}"><i class="fa fa-bars mr-2"></i>blog</a></li>
       <li class="menu_item"><a href="#"><i class="fa fa-address-book mr-2"></i>contact</a></li>

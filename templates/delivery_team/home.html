@@ -29,7 +29,7 @@
                     <tbody>
                         {% for item in confirmed_qs %}
                             <tr>
-                            <th scope="row"><a href="{% url 'delivery:detail' item.id %}" class="text-primary">{{item}}</a></th>
+                            <th scope="row"><a href="{% url 'delivery:detail' pk=item.pk %}" class="text-primary">{{item}}</a></th>
                             <th scope="row"><a class="text-primary">{{item.order.status}}</a></th>
                             <th></th>
                             <th><a class='btn btn-danger btn-sm' href="">Delete</a></th>

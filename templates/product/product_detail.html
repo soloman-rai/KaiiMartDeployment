@@ -12,10 +12,25 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/single_responsive.css' %}">
 
 	<style>
+		@media only screen and (max-width: 575px){
+			.single_product_image {
+				height: calc((100vw - 200px) / 0.86);
+			}
+		}
+			
+		@media only screen and (max-width: 991px){
+			.single_product_image {
+				margin-bottom: 15px;
+				max-height: 200px;
+			}
+		}
+		.navbar_user li a{
+			width: auto;
+		}
 
 		#similar_items img{
-			width: 200px;
-			height: 200px;
+			/* width: 200px;
+			height: 200px; */
 			display: block;
 		}
 
@@ -164,8 +179,8 @@
 					<!-- Breadcrumbs -->
 					<div class="breadcrumbs d-flex flex-row align-items-center">
 						<ul>
-							<li><a href="">Home</a></li>
-							<li><a href=""><i class="fa fa-angle-right" aria-hidden="true"></i>{{product.category}}</a></li>
+							<li><a href="{% url 'home' %}">Home</a></li>
+							<li><a href="{% url 'product:cat-product' product.category.pk %}"><i class="fa fa-angle-right" aria-hidden="true"></i>{{product.category}}</a></li>
 							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>{{product.title}}</a></li>
 						</ul>
 					</div>
@@ -212,7 +227,8 @@
 						</div>
 						<div class="original_price">Rs{{product.price}}</div>
 						<div class="product_price">Rs{{product.price_after_discount}}</div>
-						<ul class="star_rating">
+						<!-- Product ratings are not included for now -->
+						<!-- <ul class="star_rating">
 							{% for rate in rating %}
 								<span class = "fa fa-star checked"></span>
 							{% endfor %}
@@ -226,7 +242,7 @@
 									<span class = "fa fa-star"></span>
 								{% endfor %}  
 							{% endif %}  
-						</ul>
+						</ul> -->
 						<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 							<div>
 								<form method='POST' action="{% url 'carts:update' %}">
@@ -265,26 +281,40 @@
 					<div id="tab_1" class="tab_container active">
 						<div class="row">
 							<div class="col additional_info_col">
-								<div class="tab_title additional_info_title">
-									<h4>Additional Information</h4>
-								</div>
-								<p>COLOR:<span>{{product.color}}</span></p>
-								<p>SIZE:<span>{{product.size}}</span></p>
+								<!-- <p>COLOR:<span>{{product.color}}</span></p>
+								<p>SIZE:<span>{{product.size}}</span></p> -->
 								<p>
 									DESCRIPTION: <span>{{product.description}}</span>
 								</p>
-								
+									
 							</div>
+							{% if product.video %}
+								<!-- <span>Product Video</span> -->
+								{% load embed_video_tags %}
+								<div class="col-lg-6 mb-5">
+									<!-- Collapse Panel 2-->
+									<button data-toggle="collapse" data-target="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-warning btn-block py-2 shadow-sm">
+										<p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2"><strong class="text-uppercase">View Product Video <i class="fa fa-video-camera ml-2"></i></strong><i class="fa fa-angle-down"></i></p>
+									</button>
+									<div id="collapseExample2" class="collapse shadow-sm">
+										<div class="card">
+										<div class="card-body">
+											{% video product.video as my_video %}
+											{% video my_video "tiny" %}
+											{% endvideo %}
+										</div>
+										</div>
+									</div>
+								</div>
+							
+							{% endif %}
 						</div>
 					</div>
 
 					<!-- Tab Reviews -->
 					<div id="tab_2" class="tab_container">
 						<div class="row">
-							<div class="col-lg-6 reviews_col">	
-								<div class="tab_title reviews_title">
-									<h4>Reviews ({{comments.count}})</h4>
-								</div>
+							<div class="col-lg-6 reviews_col">
 								{% for comment in comments %}
 									<div class="user_review_container d-flex flex-column flex-sm-row">
 										<div class="user">
@@ -320,14 +350,14 @@
 											<div class="user_name">{{comment.user.username}}</div>
 											<p>{{comment.body}}</p>
 											
-											<a href="">
+											<!-- <a href="">
 												<i class="fa fa-edit">edit</i>
-											</a>
+											</a> -->
 
-											<a data-toggle="collapse" href="#replyBox{{comment.id}}" role="button" aria-expanded="false" aria-controls="replyBox{{comment.id}}">
-												<i class="fa fa-reply">Reply</i>
+											<a data-toggle="collapse" href="#replyBox{{comment.id}}" role="button" aria-expanded="false" aria-controls="replyBox{{comment.id}}" class="btn btn-primary">
+												<i class="fa fa-reply mr-2"></i>Reply
 											</a>
-											<div class="collapse" id="replyBox{{comment.id}}">
+											<div class="collapse mt-3" id="replyBox{{comment.id}}">
 												{% if user.is_authenticated %}
 													<div class="card card-body mt-1">
 														<form action="{% url 'product:comment' %}" method="post">
@@ -335,12 +365,12 @@
 															<input type="hidden" value='{{comment.id}}' name='comment_id'>
 															<input type="hidden" value='{{product.id}}' name='product_id'>
 															<div class="row my-2">
-																<div class='col-md-6'>
+																<div class='col-md-12'>
 																	<textarea class='form-control' name="body" placeholder="Comment goes here" cols="30" rows="3" style="resize: none;">
 																	</textarea>
 																</div>
 															</div>
-															<button class="btn btn-info" type="submit">Submit</button>
+															<button class="btn btn-info" type="submit">Post</button>
 														</form>
 													</div>
 												{% else %}
@@ -436,6 +466,7 @@
 		</div>
 	</div>
 
+{% if similar_items %}
 	<!-- Similar Items -->
 	<div class="container mt-5 mb-5">
 		<div class="top-content">
@@ -444,7 +475,7 @@
 				
 				<div id="similar_items" class="carousel slide mt-5" data-ride="carousel">
 					<div class="carousel-inner row w-100 mx-auto" role="listbox">
-						{% if similar_items %}
+						
 							{% for k,v in product_rating %}
 								<div class="carousel-item col-sm-6 col-md-6 col-lg-4 {% if forloop.first %}active{% endif %}">
 									<div class="card mb-2">
@@ -452,11 +483,11 @@
 											<img src="{{k.imageURL}}" class="img-fluid mx-auto d-block" alt="img1">
 										</a>
 										<div class="card-body">
-											<p class="d-flex justify-content-center"><a href="" class="font-weight-bold black-text">{{k}}</a></p>
+											<p class="d-flex justify-content-center"><a href="{% url 'product:detail' k.id %}" class="font-weight-bold black-text">{{k}}</a></p>
 											<p class="d-flex justify-content-center"><small class="mr-1"><s>Rs{{k.price}}</s></small>
 												<strong style='color: red'>Rs{{k.price_after_discount}}</strong>
 											</p> 
-											<p class="d-flex justify-content-center">
+											<!-- <p class="d-flex justify-content-center">
 												{% for i in v|get_checked_range:v %}
 												<span class = "fa fa-star checked"></span>    
 												{% endfor %}  
@@ -464,14 +495,14 @@
 												<span class = "fa fa-star"></span>
 												{% endfor %}  
 												<span class="ml-1">Rating({{v}})</span>
-											</p>
+											</p> -->
 											<div class="d-flex justify-content-center">
 												<form method='POST' action="{% url 'carts:update' %}">
 													{% csrf_token %}
 													<input type="hidden" value="{{k.id}}" name='products_id'>
 													<input type='hidden' name='qty' value='1'/>
 													<button class="btn btn-dark btn-rounded btn-sm px-3" type="submit" name='add'>
-														Buy Now <i class = "fa fa-shopping-cart"></i>
+														Add to Cart <i class = "fa fa-shopping-cart"></i>
 													</button>    
 												</form>
 											</div>  
@@ -479,7 +510,7 @@
 									</div>
 								</div>
 							{% endfor %}
-						{% endif %}		
+							
 					</div>
 					<a class="carousel-control-prev" href="#similar_items" role="button" data-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -493,6 +524,7 @@
 			</div>
 		</div>
 	</div>
+{% endif %}	
 
 {% endblock %}
 

@@ -6,15 +6,16 @@
 {% block main %}
 
     <div class="container mt-5">
-        <section class="text-center mb-4">
+      <div class="my-5"></div> <hr>
+        <section class="text-center mb-4 mt-5">
           <!--Grid row-->
           {% if product %}
-            <div class="row wow fadeIn">     
+            <div class="row wow fadeIn mt-5">     
               {% for item in product %}
                 <!--Grid column-->     
-                <div class="col-lg-3 col-md-6 mb-4"> 
+                <div class="col-lg-3 col-md-6 mb-4 mt-5"> 
                   <!--Card-->
-                  <div class="card"> 
+                  <div class="card mt-5> 
                     <!--Card image-->
                     <div class="view overlay">
                       <img src="{{item.imageURL}}" class="card-img-top"
@@ -49,9 +50,9 @@
             </div>
             <!--Grid row-->  
           {% else %} 
-            <div><h1>No products to show. Add product</h1></div>
+            <div><h5>No products to show. Please add products to view them here.</h5></div>
           {% endif %}   
         </section> 
-      </div>
+    </div>
 
 {% endblock %}

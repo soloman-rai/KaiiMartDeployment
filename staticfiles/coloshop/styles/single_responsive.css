@@ -116,7 +116,7 @@
 	.single_product_image
 	{
 		margin-bottom: 15px;
-		height: 785px;
+		height: 175px;
 	}
 	.single_product_thumbnails
 	{
@@ -268,7 +268,7 @@
 	}
 	.single_product_image
 	{
-		height: calc((100vw - 30px) / 0.86);
+		height: calc((100vw - 200px) / 0.86);
 	}
 	.single_product_thumbnails ul li
 	{

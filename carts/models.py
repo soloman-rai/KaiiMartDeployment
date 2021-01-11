@@ -8,6 +8,7 @@ from product.models import Product
 
 USER = get_user_model()
 
+#CartManager defines the new_or_get function that 
 class CartManager(models.Manager):
     def new_or_get(self, request):
         cart_id = request.session.get('cart_id', None)
@@ -48,7 +49,7 @@ class Cart(models.Model):
         return f'Cart id: {self.id}'
 
     def update_total(self):
-        items = self.cartitem_set.all()
+        items = self.cartitem_set.all()  #cartitem_set is used beacause of the many to many field between cart and product, it is provided by django
         total = 0
         for item in items:
             total += item.item_total_price

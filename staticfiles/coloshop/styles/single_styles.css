@@ -580,7 +580,6 @@ section
 	justify-content: center;
 	align-items: center;
 	position: relative;
-	width: 40px;
 	height: 40px;
 	color: #1e1e27;
 	-webkit-transition: color 0.3s ease;
@@ -625,6 +624,7 @@ section
 
 .hamburger_container
 {
+	display: none;
 	margin-left: 40px;
 }
 .hamburger_container i
@@ -871,6 +871,10 @@ section
 	height: 5px;
 	background: #fe4c50;
 	content: '';
+}
+.product_details_title p
+{
+	color: #;
 }
 
 /*********************************

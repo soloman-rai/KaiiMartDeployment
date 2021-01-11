@@ -3,8 +3,324 @@
 {% block title %}<title>Home</title>{% endblock %}
 
 
+{% block css %}
+<style>
+    .effect-1 {
+    position: relative;
+}
+.effect-1::before, .effect-1::after {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #aaa;
+    box-shadow: 0 15px 10px #aaa;
+    transform: rotate(-3deg);
+}
+.effect-1::after {
+    transform: rotate(3deg);
+    right: 10px;
+    left: auto;
+}
+
+
+/* EFFECT 2 ========================================== */
+.effect-2::before{
+    position: absolute;
+    content: "";
+    z-index: -1;
+    bottom: 5px;
+    left: 30px;
+    right: 30px;
+    top: 80%;
+    background: #aaa;
+    box-shadow: 0 0 25px 17px #aaa;
+    border-radius: 100px/10px;
+}
+
+
+/* EFFECT 3 ========================================== */
+.effect-3 {
+    position: relative;
+}
+
+.effect-3::before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #aaa;
+    box-shadow: 0 15px 10px #aaa;
+    transform: rotate(-3deg);
+}
+
+
+/* EFFECT 4 ========================================== */
+.effect-4 {
+    position: relative;
+}
+
+.effect-4::before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    bottom: 15px;
+    right: 10px;
+    left: auto;
+    width: 50%;
+    top: 80%;
+    max-width: 300px;
+    background: #aaa;
+    box-shadow: 0 15px 10px #aaa;
+    transform: rotate(3deg);
+}
+
+
+/* EFFECT 5 ========================================== */
+.effect-5::before{
+	position: absolute;
+	content: "";
+	z-index: -1;
+	bottom: 20px;
+	left: 8px;
+	right: 8px;
+	top: 20px;
+	background: #aaa;
+	box-shadow: 0 0 25px 10px #aaa;
+	border-radius: 10px/40px;
+}
+.effect-5::after{
+	position: absolute;
+	content: "";
+	z-index: -1;
+	bottom: 14px;
+	left: 30px;
+	right: 30px;
+	top: 14px;
+	background: #aaa;
+	box-shadow: 0 0 25px 17px #aaa;
+	border-radius: 100px/10px;
+}
+
+/* EFFECT 6 ========================================== */
+.effect-6 {
+    position: relative;
+}
+
+.effect-6::before {
+	position: absolute;
+	content: "";
+	z-index: -1;
+	top: 26px;
+	left: 12px;
+	bottom: 50px;
+	width: 20%;
+	transform: rotate(-10deg);
+	box-shadow: 0 10px 25px 10px #aaa;
+}
+
+.effect-6::after {
+	position: absolute;
+	content: "";
+	z-index: -1;
+	top: 26px;
+	right: 10px;
+	bottom: 50px;
+	width: 20%;
+	transform: rotate(8deg);
+	box-shadow: 0 10px 25px 10px #aaa;
+}
+
+body {
+    min-height: 100vh;
+    background: #fafafa;
+}
+
+section {
+    position: relative;
+    z-index: 99;
+}
+
+.card {
+    margin-bottom: 2.5rem;
+    border: none;
+}
+
+.list-bullets {
+    list-style: none;
+}
+
+.list-bullets li {
+    display: flex;
+    align-items: center;
+}
+
+.list-bullets li::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #5784d7;
+    border: 2px solid #8fb3f5;
+    display: block;
+    margin-right: 1rem;
+}
+</style>
+{% endblock css %}
+    
+
 {% block main %}
-  <div class="container-fluid mt-5">
+<section class="pb-5 header text-center">
+    <div class="container py-5">
+        <header class="pb-4">
+            <h1 class="display-4">Manager Home</h1>
+            <p class="font-italic text-muted mb-1">Welcome! Please get brief overview on this page.</p>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Effect 1-->
+                <div class="card effect-1">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Category</h1> <hr>
+                        {% for item in category %}
+                            <ul class="list-bullets">
+                                <li>{{item.title}}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Effect 2-->
+                <div class="card effect-2">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Product</h1> <hr>
+                        {% for item in product %}
+                            <ul class="list-bullets">
+                                <li>{{item.title}}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Default small shadow-->
+                <div class="card shadow-sm">
+                    <div class="card-body p-5">
+                        <h3 class="h5">Home Main-Sliders</h3> <hr>
+                        {% for slide in home_slider %}
+                            <ul class="list-bullets">
+                                <li>{{slide.title}}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Default large shadow-->
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Our Products Info</h1> <hr>
+                        {% for info in our_products_are %}
+                            <ul class="list-bullets">
+                                <li>{{info.info}}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <!-- Default large shadow-->
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Tags</h1> <hr>
+                        {% for tag in tags %}
+                            <ul class="list-bullets">
+                                <li>{{tag.title}}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Effect 6-->
+                <div class="card effect-6">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Blog List</h1> <hr>
+                        {% for post in blog %}
+                            <ul class="list-bullets">
+                                <li>{{post.post_title}}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Effect 3-->
+                <div class="card effect-3">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Delivery Team</h1> <hr>
+                        {% for team in delivery_team %}
+                            <ul class="list-bullets">
+                                <li>{{team.username}}-({{team.user}})</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Effect 4-->
+                <div class="card effect-4">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Supplier Profile</h1> <hr>
+                        {% for team in supplier_profile %}
+                            <ul class="list-bullets">
+                                <li>{{team.username}}-({{team.user}})</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Effect 5-->
+                <div class="card effect-5">
+                    <div class="card-body p-5">
+                        <h1 class="h5">Supplier Waiting List</h1> <hr>
+                        {% for supplier in supplier_waiting_list %}
+                            <ul class="list-bullets">
+                                <li>{{supplier.supplier_name}}-({{supplier.shop_name}})</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+
+
+<!-- <div class="container-fluid mt-5">
     <div class="row wow fadeIn">
       <div class="col-xl-6 col-md-6 mb-4"> 
           <div class="card classic-admin-card red accent-2">
@@ -121,6 +437,6 @@
             </div>
         </div>        
     </div>
-  </div>
+  </div> -->
 
 {% endblock %}

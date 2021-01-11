@@ -23,7 +23,7 @@ class CheckoutView(CreateView):
         cart_obj, new_cart_obj = Cart.objects.new_or_get(request)
         if new_cart_obj or cart_obj.product.count() == 0:
             return redirect("carts:home")
-            # Todo ..message: You're cart is empty
+            # Todo ..message: Your cart is empty
 
         return super().dispatch(request, *args, **kwargs)
 

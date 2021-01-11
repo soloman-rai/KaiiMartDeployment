@@ -32,7 +32,7 @@ def home_view(request):
     #Home Slider
     slider = HomeTopSlider.objects.all()
     #nyano organic
-    organic = Product.objects.filter(is_organic_store=True)[:8]
+    organic = Product.objects.filter(is_organic_station=True)[:8]
     #Categories
     category = Category.objects.all()
     #Our Products Are
@@ -63,17 +63,17 @@ def home_view(request):
 
 class organicstoreListView(ListView):
     model = Product
-    template_name = 'product/organic_store.html'
+    template_name = 'product/organic_station.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs = Product.objects.filter(is_organic_store=True)
-        context['organic_store'] = qs
+        qs = Product.objects.filter(is_organic_station=True)
+        context['organic_station'] = qs
         return context
 
 
-def organic_store_detail(request, pk):
-    product = Product.objects.get(id=pk, is_organic_store=True)
+def organic_station_detail(request, pk):
+    product = Product.objects.get(id=pk, is_organic_station=True)
     
     ##Rafactor Rating Code if possible
     #Product Rating On Product Detail
@@ -142,7 +142,7 @@ def organic_store_detail(request, pk):
         'similar_items': similar_products,
         'product_rating': product_and_rating.items(),
     }
-    return render(request, 'product/organic_store_detail.html', context)
+    return render(request, 'product/organic_station_detail.html', context)
 
 #Shop Page View
 def shop_page_view(request):

@@ -31,6 +31,9 @@
 			margin-top: 10%;
 			
 		}
+		.navbar_user li a{
+			width: auto;
+		}
 
 		@media (min-width: 576px) {
 			.carousel-item {
@@ -212,7 +215,7 @@
 						</div>
 						<div class="original_price">Rs{{product.price}}</div>
 						<div class="product_price">Rs{{product.price_after_discount}}</div>
-						<ul class="star_rating">
+						<!-- <ul class="star_rating">
 							{% for rate in rating %}
 								<span class = "fa fa-star checked"></span>
 							{% endfor %}
@@ -226,7 +229,7 @@
 									<span class = "fa fa-star"></span>
 								{% endfor %}  
 							{% endif %}  
-						</ul>
+						</ul> -->
 						<div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
 							<div>
 								<form method='POST' action="{% url 'carts:update' %}">
@@ -264,27 +267,40 @@
 					<!-- Tab Additional Info -->
 					<div id="tab_1" class="tab_container active">
 						<div class="row">
-							<div class="col additional_info_col">
-								<div class="tab_title additional_info_title">
-									<h4>Additional Information</h4>
-								</div>
-								<p>COLOR:<span>{{product.color}}</span></p>
-								<p>SIZE:<span>{{product.size}}</span></p>
+							<div class="col additional_info_col mb-5">
+								<!-- <p>COLOR:<span>{{product.color}}</span></p>
+								<p>SIZE:<span>{{product.size}}</span></p> -->
 								<p>
 									DESCRIPTION: <span>{{product.description}}</span>
 								</p>
-								
 							</div>
+							{% if product.video %}
+								<!-- <span>Product Video</span> -->
+								{% load embed_video_tags %}
+								<div class="col-lg-6 mb-5">
+									<!-- Collapse Panel 2-->
+									<button data-toggle="collapse" data-target="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2" class="btn btn-warning btn-block py-2 shadow-sm">
+										<p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2"><strong class="text-uppercase">View Product Video <i class="fa fa-video-camera ml-2"></i></strong><i class="fa fa-angle-down"></i></p>
+									</button>
+									<div id="collapseExample2" class="collapse shadow-sm">
+										<div class="card">
+										<div class="card-body">
+											{% video product.video as my_video %}
+											{% video my_video "tiny" %}
+											{% endvideo %}
+										</div>
+										</div>
+									</div>
+								</div>
+							
+							{% endif %}
 						</div>
 					</div>
 
 					<!-- Tab Reviews -->
 					<div id="tab_2" class="tab_container">
 						<div class="row">
-							<div class="col-lg-6 reviews_col">	
-								<div class="tab_title reviews_title">
-									<h4>Reviews ({{comments.count}})</h4>
-								</div>
+							<div class="col-lg-6 reviews_col">
 								{% for comment in comments %}
 									<div class="user_review_container d-flex flex-column flex-sm-row">
 										<div class="user">
@@ -320,14 +336,14 @@
 											<div class="user_name">{{comment.user.username}}</div>
 											<p>{{comment.body}}</p>
 											
-											<a href="">
+											<!-- <a href="">
 												<i class="fa fa-edit">edit</i>
-											</a>
+											</a> -->
 
-											<a data-toggle="collapse" href="#replyBox{{comment.id}}" role="button" aria-expanded="false" aria-controls="replyBox{{comment.id}}">
-												<i class="fa fa-reply">Reply</i>
+											<a data-toggle="collapse" href="#replyBox{{comment.id}}" role="button" aria-expanded="false" aria-controls="replyBox{{comment.id}}" class="btn btn-primary">
+												<i class="fa fa-reply mr-2"></i>Reply
 											</a>
-											<div class="collapse" id="replyBox{{comment.id}}">
+											<div class="collapse mt-3" id="replyBox{{comment.id}}">
 												{% if user.is_authenticated %}
 													<div class="card card-body mt-1">
 														<form action="{% url 'product:comment' %}" method="post">
@@ -335,7 +351,7 @@
 															<input type="hidden" value='{{comment.id}}' name='comment_id'>
 															<input type="hidden" value='{{product.id}}' name='product_id'>
 															<div class="row my-2">
-																<div class='col-md-6'>
+																<div class='col-md-12'>
 																	<textarea class='form-control' name="body" placeholder="Comment goes here" cols="30" rows="3" style="resize: none;">
 																	</textarea>
 																</div>
