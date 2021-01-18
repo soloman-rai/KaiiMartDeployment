@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from django.views.generic import TemplateView
 
 from product.views import home_view
 from accounts.views import login_view
@@ -34,12 +35,15 @@ from django.conf.urls.static import static
 admin.site.site_header  = 'Kai Admin'
 admin.site.site_title   = 'Kai Admin Panel'
 admin.site.index_title  = 'Welcome To Kai Admin Panel'
+admin.site.GRAPPELLI_ADMIN_TITLE = 'Kaii Admin'
+
 
 #Main URL
 urlpatterns = [
-    url(r'^jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path('', home_view, name='home'),
+    path('about', TemplateView.as_view(template_name='about.html'), name='about'),
     path('product/', include('product.urls', namespace='product')),
     path('seller/', include('seller.urls', namespace='seller')),
     path('customer/', include('customer.urls', namespace='customer')),

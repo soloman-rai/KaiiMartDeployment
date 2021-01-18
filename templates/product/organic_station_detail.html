@@ -10,153 +10,10 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/single_styles.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/single_responsive.css' %}">
-
-	<style>
-
-		#similar_items img{
-			width: 200px;
-			height: 200px;
-			display: block;
-		}
-
-		#similar_items .carousel-control-prev,
-		.carousel-control-next{
-			height: 30px;
-			width: 30px;
-			outline: white;
-			background-size: 100%, 100%;
-			border-radius: 50%;
-			border: 1px solid black;
-			background-color: black;
-			margin-top: 10%;
-			
-		}
-		.navbar_user li a{
-			width: auto;
-		}
-
-		@media (min-width: 576px) {
-			.carousel-item {
-				margin-right: 0;
-			}
-			/* show 2 items */
-			.carousel-inner .active + .carousel-item {
-				display: block;
-			}
-			.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left),
-			.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item {
-				transition: none;
-			}
-			.carousel-inner .carousel-item-next {
-				position: relative;
-				transform: translate3d(0, 0, 0);
-			}
-			/* left or forward direction */
-			.active.carousel-item-left + .carousel-item-next.carousel-item-left,
-			.carousel-item-next.carousel-item-left + .carousel-item,
-			.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item {
-				position: relative;
-				transform: translate3d(-100%, 0, 0);
-				visibility: visible;
-			}
-			/* farthest right hidden item must be also positioned for animations */
-			.carousel-inner .carousel-item-prev.carousel-item-right {
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: -1;
-				display: block;
-				visibility: visible;
-			}
-			/* right or prev direction */
-			.active.carousel-item-right + .carousel-item-prev.carousel-item-right,
-			.carousel-item-prev.carousel-item-right + .carousel-item,
-			.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item {
-				position: relative;
-				transform: translate3d(100%, 0, 0);
-				visibility: visible;
-				display: block;
-				visibility: visible;
-			}
-		}
-		/* MD */
-		@media (min-width: 768px) {
-			/* left or forward direction */
-			.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item {
-				position: relative;
-				transform: translate3d(-100%, 0, 0);
-				visibility: visible;
-			}
-			/* right or prev direction */
-			.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item {
-				position: relative;
-				transform: translate3d(100%, 0, 0);
-				visibility: visible;
-				display: block;
-				visibility: visible;
-			}
-		}
-		/* LG */
-		@media (min-width: 991px) {
-			/* Show 3rd item*/
-			.carousel-inner .active + .carousel-item + .carousel-item {
-				display: block;
-			}
-			.carousel-inner .carousel-item.active:not(.carousel-item-right):not(.carousel-item-left) + .carousel-item + .carousel-item {
-				transition: none;
-			}
-			.carousel-inner .carousel-item-next {
-				position: relative;
-				transform: translate3d(0, 0, 0);
-			}
-			/* left or forward direction */
-			.carousel-item-next.carousel-item-left + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
-				position: relative;
-				transform: translate3d(-100%, 0, 0);
-				visibility: visible;
-			}
-			/* right or prev direction //t - previous slide direction last item animation fix */
-			.carousel-item-prev.carousel-item-right + .carousel-item + .carousel-item + .carousel-item + .carousel-item {
-				position: relative;
-				transform: translate3d(100%, 0, 0);
-				visibility: visible;
-				display: block;
-				visibility: visible;
-			}
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/product/product_detail.css' %}">
 {% endblock %}
 
-{% block js %}
-	<script src="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
-	<script src="{% static 'coloshop/js/single_custom.js' %}"></script>
 
-	<script>
-		$('#similar_items').on('slide.bs.carousel', function (e) {
-    /*
-        CC 2.0 License Iatek LLC 2018 - Attribution required
-    */
-    var $e = $(e.relatedTarget);
-    var idx = $e.index();
-    var itemsPerSlide = 5;
-    var totalItems = $('.carousel-item').length;
- 
-    if (idx >= totalItems-(itemsPerSlide-1)) {
-        var it = itemsPerSlide - (totalItems - idx);
-        for (var i=0; i<it; i++) {
-            // append slides to end
-            if (e.direction=="left") {
-                $('.carousel-item').eq(i).appendTo('.carousel-inner');
-            }
-            else {
-                $('.carousel-item').eq(0).appendTo('.carousel-inner');
-            }
-        }
-    }
-});
-	</script>
-{% endblock %}
 
 {% block main %}
 
@@ -178,25 +35,8 @@
 			<div class="row">
 				<div class="col-lg-7">
 					<div class="single_product_pics">
-						<div class="row">
-							<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
-								<div class="single_product_thumbnails">
-									<ul>
-										{% for item in product.organicproductimage_set.all %}
-											<li class="{% if forloop.second %}active{% endif %}">
-												<img src="{{item.imageURL}}" alt="" data-image="{{item.imageURL}}">
-											</li>
-										{% endfor %}
-									</ul>
-								</div>
-							</div>
-							<div class="col-lg-9 image_col order-lg-2 order-1">
-								<div class="single_product_image">
-									<div class="single_product_image_background">
-										<img src="{{product.imageURL}}" alt="" style="display: block;">
-									</div>
-								</div>
-							</div>
+						<div class="p-3">
+							<img src="{{product.imageURL}}" class="img-fluid" alt="">
 						</div>
 					</div>
 				</div>
@@ -206,7 +46,9 @@
 							<h2>{{product.title}}</h2>
 							<p>Category: {{product.category}}</p>
 							<p>{{product.description}}</p>
-							<p>Available: {{product.available}}</p>
+							{% if product.available and product.available != 'Select Option' %}
+							<p>Availability: {{product.available}}</p>
+							{% endif %}
 							<p>Tags:
                             {% for tag in product.tags.all %}
                                 <span class="badge badge-{{color|random}}">{{tag.title}}</span>
@@ -273,6 +115,31 @@
 								<p>
 									DESCRIPTION: <span>{{product.description}}</span>
 								</p>
+								{% if product.productimage_set.all %}
+								<hr>
+								<div class="more-images mt-3">
+									<span>More Images</span> <hr>
+									<div id="more-images-slide" class="carousel slide mt-5" data-ride="carousel">
+										<div class="carousel-inner carousel-inner-image row mx-auto" role="listbox">
+											
+											{% for item in product.productimage_set.all %}
+												<div class="carousel-item carousel-item-image col-sm-6 col-md-6 col-lg-4 {% if forloop.first %}active{% endif %}">
+													<img src="{{item.imageURL}}" class="img-fluid d-block w-100 " alt="More Product Images" data-enlargeable width="100" style="cursor: zoom-in"  >
+												</div>
+											{% endfor %}
+												
+										</div>
+										<a class="carousel-control-prev" href="#more-images-slide" role="button" data-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="sr-only">Previous</span>
+										</a>
+										<a class="carousel-control-next" href="#more-images-slide" role="button" data-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="sr-only">Next</span>
+										</a>
+									</div>
+								</div>		
+								{% endif %}
 							</div>
 							{% if product.video %}
 								<!-- <span>Product Video</span> -->
@@ -452,6 +319,7 @@
 		</div>
 	</div>
 
+{% if similar_items %}
 	<!-- Similar Items -->
 	<div class="container mt-5 mb-5">
 		<div class="top-content">
@@ -459,20 +327,20 @@
 				<h4 style="color: red;"><u>Similar Items</u></h4>
 				
 				<div id="similar_items" class="carousel slide mt-5" data-ride="carousel">
-					<div class="carousel-inner row w-100 mx-auto" role="listbox">
-						{% if similar_items %}
+					<div class="carousel-inner carousel-inner-similar row w-100 mx-auto" role="listbox">
+						
 							{% for k,v in product_rating %}
-								<div class="carousel-item col-sm-6 col-md-6 col-lg-4 {% if forloop.first %}active{% endif %}">
+								<div class="carousel-item carousel-item-similar col-sm-6 col-md-6 col-lg-4 {% if forloop.first %}active{% endif %}">
 									<div class="card mb-2">
 										<a href="{% url 'product:detail' k.id %}">
-											<img src="{{k.imageURL}}" class="img-fluid mx-auto d-block" alt="similar-item">
+											<img src="{{k.imageURL}}" class="img-fluid mx-auto d-block" alt="Product Image">
 										</a>
 										<div class="card-body">
-											<p class="d-flex justify-content-center"><a href="" class="font-weight-bold black-text">{{k}}</a></p>
+											<p class="d-flex justify-content-center"><a href="{% url 'product:detail' k.id %}" class="font-weight-bold black-text">{{k}}</a></p>
 											<p class="d-flex justify-content-center"><small class="mr-1"><s>Rs{{k.price}}</s></small>
 												<strong style='color: red'>Rs{{k.price_after_discount}}</strong>
 											</p> 
-											<p class="d-flex justify-content-center">
+											<!-- <p class="d-flex justify-content-center">
 												{% for i in v|get_checked_range:v %}
 												<span class = "fa fa-star checked"></span>    
 												{% endfor %}  
@@ -480,14 +348,14 @@
 												<span class = "fa fa-star"></span>
 												{% endfor %}  
 												<span class="ml-1">Rating({{v}})</span>
-											</p>
+											</p> -->
 											<div class="d-flex justify-content-center">
 												<form method='POST' action="{% url 'carts:update' %}">
 													{% csrf_token %}
 													<input type="hidden" value="{{k.id}}" name='products_id'>
 													<input type='hidden' name='qty' value='1'/>
 													<button class="btn btn-dark btn-rounded btn-sm px-3" type="submit" name='add'>
-														Buy Now <i class = "fa fa-shopping-cart"></i>
+														Add to Cart <i class = "fa fa-shopping-cart"></i>
 													</button>    
 												</form>
 											</div>  
@@ -495,7 +363,7 @@
 									</div>
 								</div>
 							{% endfor %}
-						{% endif %}		
+							
 					</div>
 					<a class="carousel-control-prev" href="#similar_items" role="button" data-slide="prev">
 						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -509,8 +377,16 @@
 			</div>
 		</div>
 	</div>
+{% endif %}	
 
 {% endblock %}
 
 
 
+{% block js %}
+	<!-- <script src="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script> -->
+	<script src="{% static 'coloshop/js/single_custom.js' %}"></script>
+	<script src="{% static 'js/product/product_detail.js' %}"></script>
+	
+
+{% endblock %}

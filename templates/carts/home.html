@@ -4,6 +4,19 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/cart/main.css' %}">
+<style>
+	.blockquote-custom-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -25px;
+    left: 50px;
+}
+</style>
 {% endblock %}
 
 {% block title %}<title>Cart</title>{% endblock %}
@@ -69,15 +82,40 @@
 			<div class="p-4">
 				<ul>
 					<li><strong>Cart Subtotal - </strong><span>Rs {{cart.total}}</span></li>
-					<li><strong>Delivery - </strong><span>Rs 50+</span></li>
-					<li><strong>You Save - </strong><span>Rs {{cart.total_saved_after_discount}}</span></li>
-					<li><strong>You Pay - </strong><span>Rs {{cart.total}}</span></li>
+					<!-- <li><strong>Delivery - </strong><span>Rs 50+</span></li> -->
+					<!-- <li><strong>You Save - </strong><span>Rs {{cart.total_saved_after_discount}}</span></li> -->
+					<li><strong>You Pay - </strong><span>Rs {{cart.total}} (excluding delivery charges)</span></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<a class="btn btn-dark" href="{% url 'orders:home' %}" style="float: right; margin-right: 20px;">Checkout</a>
 	<a class="btn btn-outline-dark" href="{% url 'home' %}" style="float: right; margin-right: 20px;">&#x2190; Continue Shopping</a>
+
+
+	<div class="row my-5 d-flex justify-content-center">
+		<div class="col-md-10 mt-5">
+			<div class="card"> 
+				<div class="text-center">
+					<span class="font-weight-bold h3">Important Notice <i class="fa fa-star ml-1" aria-hidden="true"></i></span>  
+				</div>     <hr> 
+				<div class="card-body">
+				<!-- CUSTOM BLOCKQUOTE -->
+				<blockquote class="blockquote blockquote-custom bg-white p-5 shadow rounded">
+					<div class="blockquote-custom-icon bg-warning shadow-sm"><i class="fa fa-quote-left text-white"></i></div>
+					<p class="mb-0 mt-2 font-italic text-justify">"Since we are just starting out, we only accept cash on delivery for the time being. 
+						The delivery charges for your order will be notified to you by our delivery team as you confirm the order. <hr>
+						<span class="text-success">"We will be providing you with online payment options very soon!"</span></p>
+					<footer class="blockquote-footerborder-top pt-4 mt-4 ">Thank you! <i class="fa fa-heart ml-1" aria-hidden="true"></i> <br>
+						<cite class="text-danger" stitle="Source Title ">- KAii Mart</cite> 
+					</footer>
+				</blockquote><!-- END -->
+		
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 
 {% endblock%}

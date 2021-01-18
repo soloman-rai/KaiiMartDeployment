@@ -31,7 +31,10 @@
                                 <th scope="row"><a class="text-primary">{{supplier.username}}</a></th>
                                 <th></th>
                                 <th></th>
-                                <th><a class='btn btn-danger btn-sm' href="{% url 'manager:delete_supplier' supplier.id %}">Delete</a></th>
+                                <th>
+                                    <a class='btn btn-warning btn-sm mb-1' href="{% url 'manager:supplier_update' supplier.pk %}">Update</a>
+                                    <a class='btn btn-danger btn-sm' href="{% url 'manager:delete_supplier' supplier.id %}">Delete</a>
+                                </th>
                                 </tr>
                             {% endfor %}
                         </tbody>

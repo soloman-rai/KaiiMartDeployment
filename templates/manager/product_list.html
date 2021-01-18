@@ -6,6 +6,23 @@
 
 {% block main %}
     <div class="container-fluid mt-5">
+        <div class="row mb-5 d-flex justify-content-center">
+            <span class="display-4"><u>Quick Links</u></span>
+            <div class="col-md-6">
+                <a href="{% url 'manager:our_products_are' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-info mr-3"></i>Our Product Info
+                </a> 
+                <a href="{% url 'manager:campaign' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-users mr-3"></i> Campaigns
+                </a>
+                <a href="{% url 'manager:category_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-object-ungroup mr-3"></i> Product Categories
+                </a>
+                <a href="{% url 'manager:product_images' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-image mr-3"></i> Product Images
+                </a>
+            </div>
+        </div>
         <div class="row wow fadeIn">
             <div class="col-md-10 mb-5">
                 <div class="card card-list">

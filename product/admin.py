@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (Category, Product, Tag, ProductImage, Comment, Rating)
+from .models import *
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
@@ -47,3 +47,4 @@ admin.site.register(Tag, TagAdmin)
 admin.site.register(ProductImage)
 admin.site.register(Comment)
 admin.site.register(Rating, RatingAdmin)
+admin.site.register(Campaign)

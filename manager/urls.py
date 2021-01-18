@@ -1,9 +1,5 @@
 from django.urls import path
-from .views import (ManagerHomeView, TagListView, DeleteTagView, ProductListView, ProductUpdateView,
-                    DeleteProductView, CategoryListView, DeleteCategoryView, delivery_team_list,
-                    DeleteDeliveryTeamView, supplier_list, SupplierFormView, SupplierFormUpdateView,
-                    DeleteSupplierView, HomeSliderListView, OurProductsAreView, BlogCreateView,
-                    BlogUpdateView, BlogDeleteView, ManagerSettingView)
+from .views import *
 
 
 app_name = 'manager'
@@ -24,9 +20,18 @@ urlpatterns = [
     path('supplier-list', supplier_list, name='supplier_list'),
     path('supplier-waiting-list', SupplierFormView.as_view(), name='supplier_waiting_list'),
     path('supplier-waiting-update/<str:pk>', SupplierFormUpdateView.as_view(), name='supplier_waiting_update'),
+    path('update-supplier/<str:pk>', SupplierUpdateView.as_view(), name='supplier_update'),
     path('delete-supplier/<str:pk>', DeleteSupplierView.as_view(), name='delete_supplier'),
     path('blog-create', BlogCreateView.as_view(), name='blog_create'),
     path('blog-update/<str:pk>', BlogUpdateView.as_view(), name='blog_update'),
     path('blog-delete/<str:pk>', BlogDeleteView.as_view(), name='blog_delete'),
     path('settings', ManagerSettingView.as_view(), name='settings'),
+
+    path('campaigns', CampaignView.as_view(), name='campaign'),
+    path('campaign/<int:pk>/update', CampaignUpdateView.as_view(), name='campaign_update'),
+    path('campaign/<int:pk>/delete', CampaignDeleteView.as_view(), name='campaign_delete'),
+
+    path('product_images', ProductImageView.as_view(), name='product_images'),
+    path('product_image/<int:pk>/update', ProductImageUpdateView.as_view(), name='product_image_update'),
+    path('product_image/<int:pk>/delete', ProductImageDeleteView.as_view(), name='product_image_delete'),
 ]

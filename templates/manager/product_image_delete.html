@@ -1,0 +1,9 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Delete Product Image</title>{% endblock %}
+
+
+
+{% block main %}
+    {% include 'utils/delete_item.html' with title='product image' object=object %}
+{% endblock main %}

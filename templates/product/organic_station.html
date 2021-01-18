@@ -8,10 +8,10 @@
 <link rel="stylesheet" type="text/css" href="{% static 'coloshop/styles/categories_responsive.css' %}">
 {% endblock %}
 
-{% block js %}
+<!-- {% block js %}
 <script src="{% static 'coloshop/plugins/jquery-ui-1.12.1.custom/jquery-ui.js' %}"></script>
 <script src="{% static 'coloshop/js/categories_custom.js' %}"></script>
-{% endblock %}
+{% endblock %} -->
 
 {% block title %}
 <title>Organic Shop</title>
@@ -35,37 +35,33 @@
 				<div class="main_content">
 					<div class="products_iso">
 						<div class="row">
-							<div class="col">
-								<div class="product-grid">
-									{% for item in organic_station %}
-									<div class="product-item" style="margin-top: 20px;">
-										<div class="product discount product_filter">
-											<a href="{% url 'product:organic_detail' item.id %}">
-												<div class="product_image">
-													<img src="{{item.imageURL}}" alt="" style="display: block;">
-												</div>
-											</a>
-											<div class="favorite favorite_left"></div>
-											<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>New</span></div>
-											<div class="product_info">
-												<h6 class="product_name"><a href="{% url 'product:organic_detail' item.id %}">{{item.title}}</a></h6>
-												<div class="product_price">Rs{{item.price_after_discount}}<span>Rs{{item.price}}</span></div>
-											</div>
+							{% for item in organic_station %}
+							<div class="product-item col-md-3" style="margin-top: 20px;">
+								<div class="product discount product_filter">
+									<a href="{% url 'product:organic_detail' item.id %}">
+										<div class="product_image">
+											<img src="{{item.imageURL}}" alt="" style="display: block;">
 										</div>
-										<div class="red_button add_to_cart_button">
-											<form method='POST' action="{% url 'carts:update' %}">
-												{% csrf_token %}
-												<input type="hidden" value="{{item.id}}" name='products_id'>
-							
-												<input type='hidden' name='qty' value='1'/>
-							
-												<button class="btn btn-danger btn-md" type="submit" name='add'>Add to cart </button>    
-											</form> 
-										</div>  
+									</a>
+									<div class="favorite favorite_left"></div>
+									<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>New</span></div>
+									<div class="product_info">
+										<h6 class="product_name"><a href="{% url 'product:organic_detail' item.id %}">{{item.title}}</a></h6>
+										<div class="product_price">Rs{{item.price_after_discount}}<span>Rs{{item.price}}</span></div>
 									</div>
-									{% endfor %}
 								</div>
+								<div class="red_button add_to_cart_button">
+									<form method='POST' action="{% url 'carts:update' %}">
+										{% csrf_token %}
+										<input type="hidden" value="{{item.id}}" name='products_id'>
+					
+										<input type='hidden' name='qty' value='1'/>
+					
+										<button class="btn btn-danger btn-md" type="submit" name='add'>Add to cart <i class="fa fa-cart-plus"></i></button>    
+									</form> 
+								</div>  
 							</div>
+							{% endfor %}
 						</div>
 					</div>
 				</div>

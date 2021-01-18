@@ -1,0 +1,10 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Delete Campaign</title>{% endblock %}
+
+
+
+{% block main %}
+    {% include 'utils/delete_item.html' with title='campaign' object=object %}
+{% endblock main %}
+    

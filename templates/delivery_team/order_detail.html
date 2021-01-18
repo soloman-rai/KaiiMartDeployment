@@ -6,7 +6,8 @@
 {% block main %}
 
     <div class="container mt-5">
-        <h1>Order: {{delivery.order.order_id}}</h1>
+        <h1>Order: {{delivery.order.order_id}}</h1> 
+        <a href="{% url 'delivery:update_order_status' delivery.order.pk %}" class="btn btn-info">Update Order Status</a>
         <hr>
         <h5>Status: {{delivery.order.status}}</h5>
         <h5>Name: {{delivery.order.full_name}}</h5>

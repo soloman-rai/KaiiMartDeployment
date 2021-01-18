@@ -6,7 +6,7 @@ from carts.models import Cart
 from seller_product.utils import order_id_generator
 
 from django.views.generic import TemplateView, CreateView, View
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from delivery_team.models import Delivery
 
@@ -84,6 +84,8 @@ def finalize(request):
     
     if 'confirm' in request.POST:
         request.session['items_total'] = 0
+        del request.session['cart_id']
+        # request.session.flush()
 
         delivery = Delivery.objects.create(order=order_obj, total=order_obj.total)
         delivery.save()

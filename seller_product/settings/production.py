@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -168,4 +169,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SITE_URL=''
 SITE_NAME=''
+
+GRAPPELLI_ADMIN_TITLE = 'Welcome KAii Mart Admin'
 

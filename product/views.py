@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from manager.models import HomeTopSlider, OurProductsAre
-from .models import (Product, Tag, ProductImage, Comment, Rating, Category)
+from .models import (Product, Tag, ProductImage, Comment, Rating, Category, Campaign)
 from .forms import ProductCreateForm
 from carts.models import Cart, CartItem
 from blog.models import BlogModel
@@ -32,11 +32,13 @@ def home_view(request):
     #Home Slider
     slider = HomeTopSlider.objects.all()
     #nyano organic
-    organic = Product.objects.filter(is_organic_station=True)[:8]
+    organic = Product.objects.filter(is_organic_station=True)[:10]
     #Categories
-    category = Category.objects.all()
+    category = Category.objects.all()[:3]
     #Our Products Are
-    our_products_are = OurProductsAre.objects.all()
+    # our_products_are = OurProductsAre.objects.all()
+    #Deal of the Week
+    deal_of_the_week = Campaign.objects.filter(title='Deal of the Week')
     #Latest Products
     latest_product = Product.objects.all().order_by('-id')[:10]
     #Blogs
@@ -54,7 +56,7 @@ def home_view(request):
         'organic': organic,
         'product': latest_product,
         'category': category,
-        'our_products_are': our_products_are,
+        'deal_of_the_week': deal_of_the_week,
         'color': color,
         'blog': blog,
     }
@@ -318,10 +320,11 @@ class ProductSearchResultView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Product.objects.filter(
+        search_results = Product.objects.filter(
             Q(title__icontains=query) | Q(season_choice__icontains=query) | 
             Q(tags__title__icontains=query) | Q(title__startswith=query)
         )
+        object_list = search_results.distinct()
         return object_list
 
 

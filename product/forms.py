@@ -44,3 +44,6 @@ class ProductCreateForm(forms.ModelForm):
                 "class": "form-control"
             }),
         }
+
+
+    
