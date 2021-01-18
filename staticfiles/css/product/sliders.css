@@ -1,0 +1,85 @@
+.main-carousel{
+    margin-top: 64px;
+    margin-bottom: 100px;
+}
+
+.carousel-cell {
+    width: 100%;
+    height: 600px;
+    counter-increment: carousel-cell;
+}
+
+.carousel-cell::before{
+    display: block;
+} 
+
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .main-carousel{
+        margin-top: 63px;
+        margin-bottom: 100px;
+        margin-right: -28px;
+    }
+    
+    .carousel-cell {
+        width: 100%;
+        height: 50vh;
+        counter-increment: carousel-cell;
+    }
+    
+    .carousel-cell::before{
+        display: block;
+    }  
+}
+
+@media only screen and (min-width: 425px) and (max-width: 768px){
+    .main-carousel{
+        margin-top: 56px;
+        margin-bottom: 100px;
+    }
+    
+    .carousel-cell {
+        width: 100%;
+        height: 50vh;
+        counter-increment: carousel-cell;
+    }
+    
+    .carousel-cell::before{
+        display: block;
+    }  
+}
+
+@media only screen and (min-width: 320px) and (max-width: 375px){
+    .main-carousel{
+        margin-top: 55px;
+        margin-bottom: 100px;
+        margin-right: -25px;
+    }
+    
+    .carousel-cell {
+        width: 100%;
+        height: 50vh;
+        counter-increment: carousel-cell;
+    }
+    
+    .carousel-cell::before{
+        display: block;
+    }  
+}
+
+@media only screen and (max-width: 320px){
+    .main-carousel{
+        margin-top: 55px;
+        margin-bottom: 100px;
+        margin-right: -80px;
+    }
+    
+    .carousel-cell {
+        width: 100%;
+        height: 50vh;
+        counter-increment: carousel-cell;
+    }
+    
+    .carousel-cell::before{
+        display: block;
+    }  
+}

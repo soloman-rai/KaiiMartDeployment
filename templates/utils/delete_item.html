@@ -1,0 +1,15 @@
+<div class="container-fluid mt-5">
+    <div class="row wow fadeIn">
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h4>Are you sure you want to delete this {{title}}<br/><strong>{{object}}</strong>?</h4>
+                    <br>
+                    <a onclick="history.go(-1)" class="btn btn-success btn-sm">Cancel</a>
+                    <button type="submit" class='btn btn-danger btn-sm'>Delete</button>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

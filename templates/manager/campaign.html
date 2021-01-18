@@ -1,0 +1,50 @@
+{% extends 'other_base.html' %}
+ 
+{% block title %}<title>Campaign List</title>{% endblock %}
+
+
+{% block main %}
+<div class="container-fluid mt-5">
+    <div class="row wow fadeIn align-items-center">
+      <div class="col-md-10 mb-5">
+          <div class="card card-list">
+              <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                  <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{campaigns.count}}</p>
+              </div>
+              <div class="card-body">
+                  <div class="text-center mb-5">
+                      <strong>Campaigns List</strong>
+                  </div>
+                  <table class="table">
+                  <thead>
+                      <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Product</th>
+                      <!-- <th scope="col">Created Time</th> -->
+                      <th scope="col">Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for item in campaigns %}
+                          <tr>
+                          <th scope="row"><a class="text-primary">{{item.title}}</a></th>
+                          <th scope="row"><a class="text-primary">{{item.product.title}}</a></th>
+                          <!-- <th scope="row"><a class="text-primary">{{item.posted_date}}</a></th> -->
+                          <th>
+                              <a class='btn btn-warning btn-sm mb-1' href="{% url 'manager:campaign_update' item.pk %}">Update</a>
+                              <a class='btn btn-danger btn-sm' href="{% url 'manager:campaign_delete' item.pk %}">Delete</a>
+                          </th>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+                  </table>
+              </div>
+          </div> 
+      </div>
+
+      {% include 'utils/create_item.html' with title='Create New Campaign' %}
+
+    </div>
+</div> 
+{% endblock main %}
+    

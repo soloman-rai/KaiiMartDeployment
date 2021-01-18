@@ -46,3 +46,23 @@ class CustomerProfile(models.Model):
                 image.save(self.profile_pic.path)     
         except:
             url = ''
+
+
+class NewsletterSubscription(models.Model):
+    email = models.EmailField(max_length=254, unique=True)
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.email}'
+
+
+class Enquiry(models.Model):
+    first_name = models.CharField(max_length=150, blank=True, null=True)
+    last_name = models.CharField(max_length=150, blank=True, null=True)
+    email = models.EmailField(max_length=254, help_text="Your email address")
+    contact_number = models.IntegerField(blank=True, null=True)
+    message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f'Enquiry by {self.email}'
+

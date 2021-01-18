@@ -5,11 +5,9 @@
 {% load crispy_forms_tags%}
 
 {% block main %}
-
-<main class="pt-5 mx-lg-5">
     <div class="container-fluid mt-5">
         <div class="row wow fadeIn">
-            <div class="col-6">
+            <div class="col-md-10 mb-5">
                 <div class="card card-list">
                     <div class="card-header white d-flex justify-content-between align-items-center py-3">
                         <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{supplierprofile.count}}</p>
@@ -33,7 +31,10 @@
                                 <th scope="row"><a class="text-primary">{{supplier.username}}</a></th>
                                 <th></th>
                                 <th></th>
-                                <th><a class='btn btn-danger btn-sm' href="{% url 'manager:delete_supplier' supplier.id %}">Delete</a></th>
+                                <th>
+                                    <a class='btn btn-warning btn-sm mb-1' href="{% url 'manager:supplier_update' supplier.pk %}">Update</a>
+                                    <a class='btn btn-danger btn-sm' href="{% url 'manager:delete_supplier' supplier.id %}">Delete</a>
+                                </th>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -41,7 +42,7 @@
                     </div>
                 </div> 
             </div>
-            <div class="col-6">
+            <div class="col-md-10 mb-5">
                 <div class='card'>
                     <div class='text-center mt-3'>
                         <strong>Create Supplier</strong>  
@@ -57,6 +58,5 @@
             </div>
         </div>
     </div>
-</main>
 
 {% endblock %}

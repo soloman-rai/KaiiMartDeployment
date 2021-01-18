@@ -8,7 +8,7 @@ from product.forms import ProductCreateForm
 from delivery_team.forms import DeliveryTeamRegisterForm
 from seller.forms import SupplierRegisterForm
 
-from product.models import Tag,Product, Category 
+from product.models import Tag,Product, Category, Campaign, ProductImage
 from delivery_team.models import DeliveryTeamProfile
 from seller.models import SupplierProfile, SupplierForm
 from blog.models import BlogModel
@@ -341,6 +341,19 @@ def supplier_list(request):
     else:
         return redirect('login')    
 
+class SupplierUpdateView(LoginRequiredMixin, UpdateView):
+    model = SupplierProfile
+    fields = '__all__'
+    template_name = 'manager/supplier_update.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_manager:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')
+
+    def get_success_url(self):
+        return reverse('manager:supplier_list') 
 
 class DeleteSupplierView(LoginRequiredMixin, DeleteView):
     model = SupplierProfile
@@ -366,9 +379,9 @@ class SupplierFormView(LoginRequiredMixin, ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs_waiting = SupplierForm.objects.filter(status='Waiting').order_by('-id')
-        qs_ignored = SupplierForm.objects.filter(status='Ignore').order_by('-id')
-        qs_accepted = SupplierForm.objects.filter(status='Accept').order_by('-id')
+        qs_waiting = SupplierForm.objects.filter(status='waiting').order_by('-id')
+        qs_ignored = SupplierForm.objects.filter(status='ignore').order_by('-id')
+        qs_accepted = SupplierForm.objects.filter(status='accept').order_by('-id')
         context['status_waiting'] = qs_waiting
         context['status_ignored'] = qs_ignored
         context['status_accepted'] = qs_accepted
@@ -458,3 +471,93 @@ class ManagerSettingView(LoginRequiredMixin, TemplateView):
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect('login')
+
+    
+
+
+class CampaignView(LoginRequiredMixin, CreateView):
+    model = Campaign
+    fields = '__all__'
+    template_name = 'manager/campaign.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_manager:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        qs = Campaign.objects.all()
+        context['campaigns'] = qs
+        return context       
+
+    def get_success_url(self):
+        return reverse('manager:campaign') 
+
+
+class CampaignUpdateView(LoginRequiredMixin, UpdateView):
+    model = Campaign
+    fields = '__all__'
+    template_name = 'manager/campaign_update.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_manager:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')
+
+    def get_success_url(self):
+        return reverse('manager:campaign') 
+
+
+class CampaignDeleteView(LoginRequiredMixin, DeleteView):
+    model = Campaign
+    template_name = 'manager/campaign_delete.html'
+
+    def get_success_url(self):
+        return reverse('manager:campaign')
+
+
+class ProductImageView(LoginRequiredMixin, CreateView):
+    model = ProductImage
+    fields = '__all__'
+    template_name = 'manager/product_images.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_manager:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        qs = ProductImage.objects.all()
+        context['product_images'] = qs
+        return context       
+
+    def get_success_url(self):
+        return reverse('manager:product_images') 
+
+
+class ProductImageUpdateView(LoginRequiredMixin, UpdateView):
+    model = ProductImage
+    fields = '__all__'
+    template_name = 'manager/product_image_update.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_manager:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')
+
+    def get_success_url(self):
+        return reverse('manager:product_images') 
+
+
+class ProductImageDeleteView(LoginRequiredMixin, DeleteView):
+    model = ProductImage
+    template_name = 'manager/product_image_delete.html'
+
+    def get_success_url(self):
+        return reverse('manager:product_images')

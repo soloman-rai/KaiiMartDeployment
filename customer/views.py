@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 
-from .forms import CustomerRegisterForm, CustomerProfileEditForm
-from .models import CustomerProfile
+from .forms import CustomerRegisterForm, CustomerProfileEditForm, ContactUsForm
+from .models import CustomerProfile, NewsletterSubscription, Enquiry
 from django.views.generic import CreateView, TemplateView, View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -109,5 +109,36 @@ def customer_delete(request):
         return redirect('home')
         
     return render(request, 'customer/delete_customer.html', {})
+
+
+def subscribe_newsletter(request):
+    if request.method == 'POST':
+        email = request.POST['user_email']
+
+        subscription = NewsletterSubscription.objects.create(email=email)
+        subscription.save()
+
+        return HttpResponse('')   
+
+
+# class ContactUsView(CreateView):
+    form_class = ContactUsForm
+    template_name = 'contact_us.html'
+    # success_url = reverse_lazy('customer:contact_us')
+
+
+def contact_us_view(request):
+    if request.method == 'POST':
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        p_num = request.POST['p_num']
+        c_num = int(p_num)
+        email = request.POST['email']
+        message = request.POST['message']
+
+        enquiry = Enquiry.objects.create(first_name=fname, last_name=lname, email=email, contact_number=c_num, message=message)
+        enquiry.save()
+
+        return HttpResponse('')
 
 

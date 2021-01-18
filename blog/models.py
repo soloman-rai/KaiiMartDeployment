@@ -33,14 +33,7 @@ class BlogModel(models.Model):
         except:
             url = ''
         return url
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        image = Image.open(self.image.path)
-        if (image.height > 300 and image.width > 300):
-            output_size = (300, 300)
-            image.thumbnail(output_size)
-            image.save(self.image.path)    
+    
 
 
 class BlogComment(models.Model):

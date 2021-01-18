@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title>Select Payment Method</title>{% endblock %}
+
+{% block main %}
+<div class="text-center mt-3">
+    <a href="{% url 'orders:esewa-request' id=order.order_id %}">
+        <button class="btn btn-info">Pay with Esewa<i class="fa fa-money ml-2"></i></button>
+    </a>
+    <a href="{% url 'orders:esewa-request' id=order.order_id %}">
+        <button class="btn btn-info">Pay with Khalti<i class="fa fa-money ml-2"></i></button>
+    </a>
+</div>
+{% endblock %}

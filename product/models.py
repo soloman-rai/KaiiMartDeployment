@@ -22,8 +22,8 @@ SEASON_CHOICES = (
 
 AVAILABLE_CHOICES = (
     ('select option', 'Select Option'),
-    ('inStock', 'In Stock'),
-    ('outOfStock', 'Out Of Stock'),
+    ('In Stock', 'In Stock'),
+    ('Out Of Stock', 'Out Of Stock'),
 )
 
 SIZE_CHOICES = (
@@ -104,13 +104,13 @@ class ProductImage(models.Model):
             url = ''
         return url        
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        image = Image.open(self.image.path)
-        if (image.height > 300 and image.width > 300):
-            output_size = (300, 300)
-            image.thumbnail(output_size)
-            image.save(self.image.path)
+    # def save(self, *args, **kwargs):
+    #     super().save(*args, **kwargs)
+    #     image = Image.open(self.image.path)
+    #     if (image.height > 300 and image.width > 300):
+    #         output_size = (300, 300)
+    #         image.thumbnail(output_size)
+    #         image.save(self.image.path)
 
 
 def get_image_path(instance, filename):
@@ -151,7 +151,7 @@ class Product(models.Model):
 
     slug = models.SlugField(max_length=100, unique=True)
 
-    is_namuna_falful = models .BooleanField(default=False)
+    is_organic_station = models.BooleanField('Item  From Organic Station', default=False)
     supplier = models.ForeignKey(USER, on_delete=models.SET_NULL, null=True)
 
     season_choice = models.CharField(choices=SEASON_CHOICES, max_length=10, default='any')
@@ -176,14 +176,14 @@ class Product(models.Model):
   
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        try:
-            image = Image.open(self.image.path)
-            if (image.height > 300 and image.width > 300):
-                output_size = (300, 300)
-                image.thumbnail(output_size)
-                image.save(self.image.path)
-        except:
-            url = ''
+        # try:
+        #     image = Image.open(self.image.path)
+        #     if (image.height > 300 and image.width > 300):
+        #         output_size = (300, 300)
+        #         image.thumbnail(output_size)
+        #         image.save(self.image.path)
+        # except:
+        #     url = ''
 
         if not self.slug:
             self.slug = slugify(self.title)
@@ -213,3 +213,13 @@ class Rating(models.Model):
     
     def __str__(self):
         return f'Rating of product {self.product} by {self.user}'
+
+
+#Product Campaigns for Deals and Offers
+class Campaign(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="img/campaign/", null=True)
+
+    def __str__(self):
+        return f'{self.title} for {self.product}'

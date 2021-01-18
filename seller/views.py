@@ -62,5 +62,6 @@ class SupplierApplicationForm(CreateView):
         if self.request.user.is_authenticated:
             form.instance.supplier_name = self.request.user.username
             form.instance.supplier_email = self.request.user
+            # form.instance.save()
         messages.success(self.request, 'Your Application has been saved. Our team will contact you soon')
         return super().form_valid(form)   

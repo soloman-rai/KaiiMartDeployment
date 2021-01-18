@@ -1,0 +1,89 @@
+@media only screen and (max-width: 375px)
+{
+    #home_main_slider .carousel-control-prev,
+    .carousel-control-next{
+        height: 30px;
+        width: 30px;
+        outline: white;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-color: black;
+        margin-top: 15%;
+    }
+}
+
+@media only screen and (min-width:375px) and (max-width: 425px)
+{
+    #home_main_slider .carousel-control-prev,
+    .carousel-control-next{
+        height: 30px;
+        width: 30px;
+        outline: white;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-color: black;
+        margin-top: 15%;
+    }
+}
+
+@media only screen and (min-width:425px) and (max-width: 768px)
+{
+    #home_main_slider .carousel-control-prev,
+    .carousel-control-next{
+        height: 30px;
+        width: 30px;
+        outline: white;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-color: black;
+        margin-top: 20%;
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width: 1024px)
+{
+    #home_main_slider .carousel-control-prev,
+    .carousel-control-next{
+        height: 30px;
+        width: 30px;
+        outline: white;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-color: black;
+        margin-top: 20%;
+    }
+}
+
+@media only screen and (min-width:1024px) and (max-width: 1440px)
+{
+    #home_main_slider .carousel-control-prev,
+    .carousel-control-next{
+        height: 30px;
+        width: 30px;
+        outline: white;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-color: black;
+        margin-top: 20%;
+    }
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 2591px)
+{
+    #home_main_slider .carousel-control-prev,
+    .carousel-control-next{
+        height: 30px;
+        width: 30px;
+        outline: white;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        border: 1px solid black;
+        background-color: black;
+        margin-top: 15%;
+    }
+}

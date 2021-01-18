@@ -2,7 +2,7 @@ from django import forms
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomerProfile
+from .models import CustomerProfile, Enquiry
 
 
 USER = get_user_model()
@@ -43,8 +43,12 @@ class CustomerProfileEditForm(forms.ModelForm):
         exclude = ('user',)
 
         widgets = {
-            "dob": forms.TextInput(attrs={
-                "class": "form-control",
-                "placeholder": "YYYY-MM-DD"
-            }),
+        'dob': forms.DateInput(
+            attrs={'class':'form-control', 'placeholder':'Select your birth date', 'type':'date'}),
         }
+
+
+class ContactUsForm(forms.ModelForm):
+    class Meta:
+        model = Enquiry
+        fields = '__all__'
