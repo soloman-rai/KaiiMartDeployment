@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from manager.models import HomeTopSlider, OurProductsAre
-from .models import (Product, Tag, ProductImage, Comment, Rating, Category)
+from .models import (Product, Tag, ProductImage, Comment, Rating, Category, Campaign)
 from .forms import ProductCreateForm
 from carts.models import Cart, CartItem
 from blog.models import BlogModel
@@ -32,11 +32,13 @@ def home_view(request):
     #Home Slider
     slider = HomeTopSlider.objects.all()
     #nyano organic
-    organic = Product.objects.filter(is_namuna_falful=True)[:8]
+    organic = Product.objects.filter(is_organic_station=True)[:10]
     #Categories
-    category = Category.objects.all()
+    category = Category.objects.all()[:3]
     #Our Products Are
-    our_products_are = OurProductsAre.objects.all()
+    # our_products_are = OurProductsAre.objects.all()
+    #Deal of the Week
+    deal_of_the_week = Campaign.objects.filter(title='Deal of the Week')
     #Latest Products
     latest_product = Product.objects.all().order_by('-id')[:10]
     #Blogs
@@ -54,26 +56,26 @@ def home_view(request):
         'organic': organic,
         'product': latest_product,
         'category': category,
-        'our_products_are': our_products_are,
+        'deal_of_the_week': deal_of_the_week,
         'color': color,
         'blog': blog,
     }
     return render(request, 'home.html', context)
 
 
-class NamunaFalfulListView(ListView):
+class organicstoreListView(ListView):
     model = Product
-    template_name = 'product/namuna_falful.html'
+    template_name = 'product/organic_station.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        qs = Product.objects.filter(is_namuna_falful=True)
-        context['namuna_falful'] = qs
+        qs = Product.objects.filter(is_organic_station=True)
+        context['organic_station'] = qs
         return context
 
 
-def namuna_falful_detail(request, pk):
-    product = Product.objects.get(id=pk, is_namuna_falful=True)
+def organic_station_detail(request, pk):
+    product = Product.objects.get(id=pk, is_organic_station=True)
     
     ##Rafactor Rating Code if possible
     #Product Rating On Product Detail
@@ -142,7 +144,7 @@ def namuna_falful_detail(request, pk):
         'similar_items': similar_products,
         'product_rating': product_and_rating.items(),
     }
-    return render(request, 'product/namuna_falful_detail.html', context)
+    return render(request, 'product/organic_station_detail.html', context)
 
 #Shop Page View
 def shop_page_view(request):
@@ -318,10 +320,11 @@ class ProductSearchResultView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        object_list = Product.objects.filter(
+        search_results = Product.objects.filter(
             Q(title__icontains=query) | Q(season_choice__icontains=query) | 
             Q(tags__title__icontains=query) | Q(title__startswith=query)
         )
+        object_list = search_results.distinct()
         return object_list
 
 

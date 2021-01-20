@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Delivery, DeliveryTeamProfile
+from orders.models import Order
 from .forms import DeliveryTeamRegisterForm, DeliveryTeamProfileEditForm
 from accounts.forms import LoginForm
 
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 
 
@@ -75,13 +77,30 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        order_id = self.kwargs['pk']
-        qs = Delivery.objects.get(id=order_id)
-        product_qs = qs.order.cart.cartitem_set.all()
+        delivery_id = self.kwargs['pk']
+        qs = Delivery.objects.get(id=delivery_id)
+        delivery_obj = get_object_or_404(Delivery, pk=delivery_id)
+        if delivery_obj:
+            product_qs = delivery_obj.order.cart.cartitem_set.all()
+        # print(product_qs)
 
-        context['order'] = qs
+        context['delivery'] = delivery_obj
         context['product'] = product_qs
-        return context       
+        return context  
+
+class OrderStatusUpdateView(LoginRequiredMixin, UpdateView):
+    model = Order
+    fields = ['status',]
+    template_name = 'delivery_team/update_order_status.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_delivery_team:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('login')
+
+    def get_success_url(self):
+        return reverse('delivery:home') 
 
 
 class DeliveryTeamSettingView(LoginRequiredMixin, TemplateView):

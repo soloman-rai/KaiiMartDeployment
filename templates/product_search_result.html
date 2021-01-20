@@ -14,7 +14,7 @@
 <script src="{% static 'coloshop/js/categories_custom.js' %}"></script>
 {% endblock %}
 
-{% block title %}<title>Result..</title>{% endblock %}
+{% block title %}<title>Search Results..</title>{% endblock %}
 
 {% block main %}
 
@@ -22,27 +22,29 @@
 
 <div class="super_container">
     <div class="container product_section_container">
-        Search Results: {{object_list.count}} Found
+        <span class="h5">  Search Results:- <strong class="shadow bg-success text-white px-3 py-1">{{object_list.count}}</strong> Product(s) Found </span> <hr>
         <div class="row">
             <div class="col product_section clearfix">
                 <div class="main_content">
                     <div class="products_iso">
                     <div class="row">
                         {% if object_list %}
-                            <div class="col">
-                            <div class="product-grid">
+                            <!-- <div class="col"> -->
+                            <!-- <div class="product-grid"> -->
                                 {% for item in object_list %} 
-                                    <div class="product-item mb-5">
-                                    <div class="product discount product_filter">
-                                        <div class="product_image">
-                                        <img src="{{item.imageURL}}" alt="">
-                                        </div>
-                                        <div class="favorite favorite_left"></div>
-                                        <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
-                                        <div class="product_info">
-                                        <h6 class="product_name"><a href="{% url 'product:detail' item.id %}">{{item.title}}</a></h6>
-                                        <div class="product_price">Rs{{item.price_after_discount}}<span>Rs{{item.price}}</span></div>
-                                        </div>
+                                    <div class="product-item mb-5 col-md-3">
+                                        <a href="{% url 'product:detail' item.id %}">
+                                            <div class="product discount product_filter">
+                                                <div class="product_image">
+                                                <img src="{{item.imageURL}}" alt="">
+                                                </div>
+                                                <div class="favorite favorite_left"></div>
+                                                <!-- <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div> -->
+                                                <div class="product_info">
+                                                <h6 class="product_name">{{item.title}}</h6>
+                                                <div class="product_price">Rs{{item.price_after_discount}}<span>Rs{{item.price}}</span></div>
+                                            </div>
+                                        </a>
                                     </div>
                                     <div class="add_to_cart_button">
                                         <form method='POST' action="{% url 'carts:update' %}">
@@ -57,11 +59,13 @@
                                     </div>
                                     </div>
                                 {% endfor %}
-                            </div>
-                            </div>
+                            <!-- </div> -->
+                            <!-- </div> -->
                         {% else %}
+                        <div class="container text-center">
                             <h5>No results found</h5>
-                            <h5>Try again with different parameters</h5>
+                            <p>Try again with different parameters</p>
+                        </div>
                         {% endif %}
                     </div>
                     </div>

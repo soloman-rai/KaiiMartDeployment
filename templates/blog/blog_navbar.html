@@ -6,7 +6,7 @@
         <div class="wrap_header">
             <!-- Logo -->
             <a href="{% url 'home' %}" class="logo">
-                KaiMart
+               Take me to KaiiMart
                 <!-- <img src="images/icons/logo.png" alt="IMG-LOGO"> -->
             </a>
 
@@ -15,14 +15,16 @@
                 <nav class="menu">
                     <ul class="main_menu">
                         <li>
-                            <a href="{% url 'blog:home' %}">Home</a>
+                            <a href="{% url 'blog:home' %}">Blogs by <span class="text-danger">KaiiMart</span></a>
                         </li>
+                        {% if user.is_authenticated and user.is_manager or user.is_admin or user.is_superuser %}
                         <li>
                             <a href="#">Create Blog</a>
                         </li>
                         <li>
                             <a href="#">My Blog</a>
                         </li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
@@ -33,7 +35,7 @@
                     <img src="{% static 'fashe/images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
                 </a>
                 
-                <!-- {% if user.is_authenticated %}
+                {% if user.is_authenticated %}
 
                     <li class="nav-item avatar dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
@@ -46,7 +48,7 @@
                         </div>
                     </li> 
                 
-                {% endif %} -->
+                {% endif %}
             </div>
         </div>
     </div>
@@ -85,12 +87,15 @@
                     <i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
                 </li>
 
+                
+                {% if user.is_authenticated and user.is_manager or user.is_admin or user.is_superuser %}
                 <li class="item-menu-mobile">
                     <a href="#">Create Blog</a>
                 </li>
                 <li class="item-menu-mobile">
                     <a href="#">My Blog</a>
                 </li>
+                {% endif %}
             </ul>
         </nav>
     </div>

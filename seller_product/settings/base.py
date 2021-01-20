@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -150,12 +151,13 @@ LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-#Email Integration
+# Email Integration
 # EMAIL_HOST = config('EMAIL_HOST')
 # EMAIL_HOST_USER = config('EMAIL_USER')
 # EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD')
 # EMAIL_PORT = config('EMAIL_PORT')
 
+<<<<<<< HEAD
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
@@ -165,3 +167,8 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'el99sharawy@gmail.com'
 EMAIL_HOST_PASSWORD = 'Goodfloyd'
+=======
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+GRAPPELLI_ADMIN_TITLE = 'Welcome KAii Mart Admin'
+>>>>>>> 95d316ed94df5b8d7764c631ca03ba25f24b2601

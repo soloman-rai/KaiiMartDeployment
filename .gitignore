@@ -4,3 +4,6 @@ seller_product/settings/local.py
 env/
 .env
 
+venv
+.venv
+

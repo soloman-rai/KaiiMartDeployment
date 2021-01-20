@@ -1,0 +1,24 @@
+
+#category-product {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+#category-product .portion {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#category-product .carousel-cell {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin-right: 10px;
+    counter-increment: carousel-cell;
+}
+
+#category-product .carousel-cell img{
+    width: 150px;
+    height: 150px;
+    display: block;
+}

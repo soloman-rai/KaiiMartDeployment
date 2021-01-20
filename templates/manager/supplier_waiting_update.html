@@ -1,7 +1,15 @@
 {% extends 'other_base.html' %}
 
-
 {% load crispy_forms_tags %}
+
+
+{% block css %}
+ <style>
+    .side-nav{
+        display: none;
+    }
+ </style>     
+{% endblock %}
 
 {% block title %}
 <title>Supplier Waiting Form Update</title>
@@ -9,7 +17,7 @@
 
 {% block main %}
 
-    <div class="mt-5"></div>
+    <!-- <div class="mt-5"></div> -->
 
     <div class="container" style="margin-top: 130px; margin-bottom: 75px;">
         <div class="p-3">

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}<title>About Us</title>{% endblock %}
+
+    
+    
+  {% block main %}
+      <div class="page-header p-3 px-5 pt-5">
+      </div>
+      <div class="container-fluid">
+        <div class="row px-3 wow zoomIn">
+        <div class="col-md-5 ml-auto">
+            <h1><p class="display-4 text-dark">Organic & <br> Farm Fresh </p></h1><hr>
+            <p class="p1 px-3">KAii Mart aims to provide organic fruits and vegetables, as well as ecological, ethical and fair products to the consumers at an affordable price. We do fast deliver all over Nepal.</p>
+          </div>
+          <div class="col-md-7  ml-auto pl-5">
+            <img src="{% static 'img/55.jpg' %}" alt="" class="img-fluid">
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" data-aos="fade-up"  data-aos-duration="5000">
+        <div class="row px-3 pt-5" data-aos="fade-up">
+            <div class="col-md-7 pt-5 ml-auto" data-aos="fade-up">
+              <img src="{% static 'img/1.jpg' %}" alt="" class="img-fluid" >
+            </div>
+            <div class="col-md-5 pt-5 ml-auto">
+              <h1><p class="display-4 text-dark">Eat Healthy</p></h1><hr>
+              <p class="p1 px-3" >KAii Mart aims to provide organic fruits and vegetables, as well as ecological, ethical and fair products to the consumers at an affordable price. We do fast deliver all over Nepal.</p>
+            </div>
+        </div>
+      </div>
+  {% endblock %}
+      

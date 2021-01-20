@@ -1,12 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import Order
 from carts.models import Cart
 
 from seller_product.utils import order_id_generator
 
-from django.views.generic import TemplateView, CreateView
-from django.urls import reverse_lazy
+from django.views.generic import TemplateView, CreateView, View
+from django.urls import reverse_lazy, reverse
 
 from delivery_team.models import Delivery
 
@@ -23,7 +23,7 @@ class CheckoutView(CreateView):
         cart_obj, new_cart_obj = Cart.objects.new_or_get(request)
         if new_cart_obj or cart_obj.product.count() == 0:
             return redirect("carts:home")
-            # Todo ..message: You're cart is empty
+            # Todo ..message: Your cart is empty
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -39,6 +39,27 @@ class CheckoutView(CreateView):
             form.save()
         return super().form_valid(form) 
            
+class PaymentSelectView(TemplateView):
+    template_name = 'checkout/choose_payment_method.html'
+
+class EsewaRequestView(View):
+    def get(self, request, *args, **kwargs):
+        order_id = request.GET.get("id")
+        cart_obj, new_cart_obj = Cart.objects.new_or_get(self.request)
+        if cart_obj:
+            order_obj = Order.objects.filter(cart=cart_obj).last()
+        context = {
+            "order": order_obj    
+        }
+        return render(request, "checkout/esewa_request.html", context)
+
+class EsewaVerifyView(View):
+    def get(self, request, *args, **kwargs):
+        oid = request.GET.get('oid')
+        amt = request.GET.get('amt')
+        refId = request.GET.get('refId')
+        return reverse('orders:final')
+
 #Checkout Step to show user info and proceed to cart deletion
 class ConfirmView(TemplateView):
     template_name = 'checkout/order_confirm.html'
@@ -63,6 +84,8 @@ def finalize(request):
     
     if 'confirm' in request.POST:
         request.session['items_total'] = 0
+        del request.session['cart_id']
+        # request.session.flush()
 
         delivery = Delivery.objects.create(order=order_obj, total=order_obj.total)
         delivery.save()

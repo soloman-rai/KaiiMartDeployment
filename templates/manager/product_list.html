@@ -5,11 +5,26 @@
 {% load crispy_forms_tags%}
 
 {% block main %}
-
-<main class="pt-5 mx-lg-5">
     <div class="container-fluid mt-5">
+        <div class="row mb-5 d-flex justify-content-center">
+            <span class="display-4"><u>Quick Links</u></span>
+            <div class="col-md-6">
+                <a href="{% url 'manager:our_products_are' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-info mr-3"></i>Our Product Info
+                </a> 
+                <a href="{% url 'manager:campaign' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-users mr-3"></i> Campaigns
+                </a>
+                <a href="{% url 'manager:category_list' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-object-ungroup mr-3"></i> Product Categories
+                </a>
+                <a href="{% url 'manager:product_images' %}" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-image mr-3"></i> Product Images
+                </a>
+            </div>
+        </div>
         <div class="row wow fadeIn">
-            <div class="col-6">
+            <div class="col-md-10 mb-5">
                 <div class="card card-list">
                     <div class="card-header white d-flex justify-content-between align-items-center py-3">
                         <p class="h5-responsive font-weight-bold mb-0"><strong>Total:</strong> {{products.count}}</p>
@@ -44,7 +59,7 @@
                     </div>
                 </div> 
             </div>
-            <div class="col-6">
+            <div class="col-md-10">
                 <div class='card'>
                     <div class='text-center mt-3'>
                         <strong>Create Product</strong>  
@@ -60,6 +75,5 @@
             </div>
         </div>
     </div>
-</main>
 
 {% endblock %}
